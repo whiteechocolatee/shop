@@ -1,0 +1,74 @@
+/* =========== general params =========== */
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: black;
+}
+
+.row {
+  margin: 0;
+}
+
+.site-burger li {
+  list-style-type: none;
+}
+
+/* =========== cards =========== */
+
+.img {
+  margin: 0 auto;
+  max-width: 50%;
+  height: auto;
+  padding: 20px;
+}
+
+.cards {
+  height: 500px;
+  margin: 0;
+  display: inline-block;
+}
+
+.card-text {
+  height: 150px;
+  overflow: scroll;
+}
+
+/* =========== navigation =========== */
+
+.site-nav {
+  width: 300px;
+  min-height: 100vh;
+  position: fixed;
+  left: -300px;
+  top: 45px;
+  z-index: 999;
+  padding: 10px;
+  transition: all ease 1s;
+  color: white;
+}
+
+.close-btn-div {
+  text-align: right;
+}
+
+.show-nav {
+  position: relative;
+}
+
+ul.category-list {
+  list-style-type: disc;
+}
+
+ul.category-list a {
+  color: grey;
+}
+
+/* =========== order form =========== */
+
+.form-space {
+  width: 800px;
+  margin: 0 auto;
+}

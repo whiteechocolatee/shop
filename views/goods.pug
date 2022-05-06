@@ -1,0 +1,24 @@
+include header 
+
+include navigationHeader
+
+div(class='container')
+    div(class='row')
+        div(class='col col-md-12')
+            h1(class='title-panel')= goods[0]['name']
+        div(class='col col-md-4')
+            img(
+                src="./images/"+goods[0]['image']
+                alt="item"
+                class='goods-big-image')
+        div(class='col col-lg-8')
+            p= goods[0]['description']
+            p #{goods[0]['cost']}uah
+            button(
+                class='btn btn-primary add-to-cart'
+                data-goods_id=goods[0]['id']
+                ) add to cart
+
+
+    include navigationPanel
+include footer

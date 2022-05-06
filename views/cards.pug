@@ -1,0 +1,16 @@
+div(class='col-md-3 cards')
+    div(class='card' style='width:18rem;')
+        div(class='content-block text-center')
+            a(href='goods?id='+val['id'])
+                img(
+                    src='./images/'+val['image']
+                    alt='item'
+                    class='card-img-top img'
+                    )
+                div(class='card-body text-center')
+                    h5(class='card-title')= val['name']
+                    p(class='card-text')= val['description']
+            button(
+            data-goods_id= val['id']
+            class="btn btn-primary add-to-cart"
+                ) add to cart

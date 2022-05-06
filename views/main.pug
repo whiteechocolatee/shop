@@ -1,0 +1,32 @@
+//- include header
+
+//- include navigationHeader
+
+
+//- div(class='container')
+//-     h1 Hello world
+//-     each val in goods ? goods : ['There is no value']
+//-         div
+//-             p= val['name']
+//-             img(src="./images/"+val['image'], alt="phone")
+//-             p= val['cost']
+//-             p= val['description']
+
+include header 
+
+include navigationHeader
+
+div(class='wrap')
+    div(class='container')
+        div(class='row')
+            div(class='col col-lg-12')
+                each valGoods,index in category ? category : ['There is no value']
+                    h2(class='category-name')
+                        a(href='cat?id='+valGoods['id'])= valGoods['category']
+                    
+                    each val,index in goods
+                        if valGoods['id'] == val['category']
+                            include cards
+
+    include navigationPanel
+include footer 
