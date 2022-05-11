@@ -139,7 +139,6 @@ app.post("/get-goods-info", function (req, res) {
   }
 });
 
-// \+38\(\d{3}\)\d{3}-\d{2}-\d{2}
 
 // sending request to db, get items in cart
 app.post("/finish-order", function (req, res) {
@@ -165,8 +164,12 @@ app.post("/finish-order", function (req, res) {
   }
 });
 
+
+
+
 // connect nodemailer function to send mails to clients
 async function sendDataMail(data, result) {
+  console.log(data);
   let letter = "<h2>Ваш заказ в магазине ....</h2>";
   let totalPrice = 0;
 
@@ -181,10 +184,13 @@ async function sendDataMail(data, result) {
   letter += "<hr>";
   letter += `Сумма заказа: ${totalPrice}`;
   letter += "<hr>";
-  letter += `<hr>имя ${data.userName}`;
-  letter += ` <hr>город - ${data.city} </br>
-              область - ${data.state}</br>
-              индекс - ${data.zip}`;
+  letter += `<hr>
+                Имя - ${data.userName} </br>
+                Номер телефона - ${data.phoneNumber}`;
+  letter += ` <hr>
+                Данные для отправки - ${data.adress}</br>
+              <hr>  
+                `;
 
   // create test account
   let testAccount = await nodemailer.createTestAccount();
@@ -202,9 +208,9 @@ async function sendDataMail(data, result) {
 
   let mailOption = {
     from: "<creatuseandr@icloud.com>",
-    to: "creatuseandr@icloud.com",
+    to: data.email,
     subject: "shop order",
-    text: "Hello world",
+    text: letter,
     html: letter,
   };
 

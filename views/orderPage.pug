@@ -9,40 +9,26 @@ div(class='container-fluid')
                 form(class='row g-3 needs-validation' novalidate)
                     div(class='col-md-12')
                         label(for='name' class='form-label') Имя
-                        input(type='text' class='form-control' id='name' value='Andrey' placeholder='Имя' required)
+                        input(type='text' class='form-control' id='name' value='Andrey Chorniy' placeholder='Имя' required)
                         div(class="invalid-feedback") Пожалуйста, укажите корректно имя!
-                    div(class='col-md-12')
-                        label(for="secondName" class="form-label") Фамилия
-                        input(type="text" class="form-control" id="secondName" value='Andrey' placeholder='Фамилия'  required)
-                        div(class="invalid-feedback") Пожалуйста, укажите корректно фамилию!
+                    div(class="col-md-12")
+                        label(for="email" class="form-label") Почта
+                        input(type="email" class="form-control" id="email" value='a.creatuse@gmail.com' placeholder="name@example.com" required)
+                        div(class="invalid-feedback") Пожалуйста, укажите корректно вашу почту!
                     div(class="col-md-12")
                         label(for="phoneNumber" class="form-label") Номер телефона
-                        input(type="tel" maxlength='12' class="form-control" id="phoneNumber" value='1230981203' placeholder='380(50)000-00-00' required)
+                        input(type="tel" minlength='10' id='phoneNumber' class="form-control tel" placeholder='380(50)000-00-00' required)
                         div(class="invalid-feedback") Пожалуйста, укажите корректно номер телефона!
-                    div(class="col-md-12")
-                        label(for="city" class="form-label") Город
-                        input(type="text" class="form-control" id="city" value='Andrey' placeholder='Населенный пункт' required)
-                        div(class="invalid-feedback") Введите корректно ваш населённый пункт!
-                    div(class="col-md-12")
-                        label(for="state" class="form-label") Область
-                        select(class="form-select" id="state" required)
-                            option(selected disabled value='') Выберите область
-                            option(value='Kharkiv') Kharkiv
-                            option Kyiv 
-                            option Nikolaev
-                            option Kherson
-                            option Mariupol
-                            option Poltava
-                        div(class="invalid-feedback") Пожалуйста, укажите корректно область!
-                    div(class="col-md-12")
-                        label(for="zip" class="form-label") Индекс
-                        input(type="number" minlength='6' maxlength='6' class="form-control" value='123123' id="zip" placeholder='Индекс населенного пункта' required)
-                        div(class="invalid-feedback") Пожалуйста, укажите корректно индекс!
+                    div(class='col-md-12')
+                        label(for="validationTextarea" class="form-label") Данные для доставки
+                        textarea(class="form-control" id="validationTextarea" rows='6' placeholder='Укажите данные для доставки (Город, область, № почтового отделения)' required)
+                        div(class="invalid-feedback") Пожалуйста, укажите корректно данные для доставки!
                     div(class="col-12")
                         div(class='form-check')
                             input(class="form-check-input terms" type="checkbox" id="invalidCheck" required)
                             label(class="form-check-label" for="invalidCheck") Agree to terms and conditions
-                            div(class="invalid-feedback") You must agree before submitting.
+                            div(class="invalid-feedback") Ознакомьтесь и подвердите
                     div(class="col-12")
                         button(class="btn btn-primary" type="submit") Submit form
     include footer
+    
