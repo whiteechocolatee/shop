@@ -83,10 +83,11 @@ form.addEventListener(
               icon: "success",
               footer: '<a href="/">Продолжить покупки</a>',
             });
-            // localStorage.clear();
-            // setTimeout(() => {
-            //   location.reload()
-            // }, 5000)
+            setTimeout(() => {
+              localStorage.clear();
+              // location.reload();
+              window.location.replace("/");
+            }, 5000);
           } else if (body == "0") {
             Swal.fire({
               icon: "error",
