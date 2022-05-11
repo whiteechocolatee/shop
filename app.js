@@ -139,7 +139,6 @@ app.post("/get-goods-info", function (req, res) {
   }
 });
 
-
 // sending request to db, get items in cart
 app.post("/finish-order", function (req, res) {
   let keys;
@@ -155,6 +154,7 @@ app.post("/finish-order", function (req, res) {
       "SELECT id, name, cost FROM goods WHERE id IN (" + keys.join(",") + ")",
       function (err, result, fields) {
         if (err) throw err;
+        savingOrder(req.body, result);
         sendDataMail(req.body, result).catch(console.error);
         res.send("1");
       }
@@ -164,12 +164,37 @@ app.post("/finish-order", function (req, res) {
   }
 });
 
+// saving order to data base
+function savingOrder(data, res) {
+  let sqlRequest;
 
+  sqlRequest = `INSERT INTO user_info (user_name, user_email, user_phone, adress) VALUES ('${data.userName}','${data.email}','${data.phoneNumber}','${data.adress}')`;
 
+  con.query(sqlRequest, function (error, result) {
+    if (error) throw error;
+
+    let userId = result.insertId;
+
+    date = new Date() / 1000;
+
+    for (let i = 0; i < res.length; i++) {
+      sqlRequest = `INSERT INTO shop_order (date,user_id, goods_id,goods_cost, goods_amount, total) VALUES (${date},${userId},${
+        res[i]["id"]
+      },${res[i]["cost"]},${data.key[res[i]["id"]]},${
+        data.key[res[i]["id"]] * res[i]["cost"]
+      })`;
+
+      con.query(sqlRequest, function (error, result) {
+        if (error) throw error;
+
+        console.log("saved");
+      });
+    }
+  });
+}
 
 // connect nodemailer function to send mails to clients
 async function sendDataMail(data, result) {
-  console.log(data);
   let letter = "<h2>Ваш заказ в магазине ....</h2>";
   let totalPrice = 0;
 
