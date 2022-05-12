@@ -84,9 +84,9 @@ form.addEventListener(
               footer: '<a href="/">Продолжить покупки</a>',
             });
             setTimeout(() => {
-              localStorage.clear();
+              // localStorage.clear();
               // location.reload();
-              window.location.replace("/");
+              // window.location.replace("/");
             }, 5000);
           } else if (body == "0") {
             Swal.fire({
