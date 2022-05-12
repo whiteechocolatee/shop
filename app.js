@@ -115,10 +115,13 @@ app.get("/admin", function (req, res) {
 });
 
 app.get("/admin-orders", function (req, res) {
-  con.query("SELECT * FROM shop_order", function (err, result, fileds) {
-    if (err) throw err;
-    res.render("orderPanel", { result });
-  });
+  con.query(
+    "SELECT *, from_unixtime(date, '%D %M %Y %H:%i:%s') as unix_timestapm FROM shop_order ORDER BY id DESC",
+    function (err, result, fileds) {
+      if (err) throw err;
+      res.render("orderPanel", { orders: JSON.parse(JSON.stringify(result)) });
+    }
+  );
 });
 
 // adding goods to cart at nav
@@ -186,7 +189,7 @@ function savingOrder(data, res) {
 
     let userId = result.insertId;
 
-    date = new Date() / 1000;
+    let date = Math.trunc(new Date() / 1000);
 
     for (let i = 0; i < res.length; i++) {
       sqlRequest = `INSERT INTO shop_order (date,user_id, goods_id,goods_cost, goods_amount, total) VALUES (${date},${userId},${
