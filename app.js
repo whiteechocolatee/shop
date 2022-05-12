@@ -110,14 +110,32 @@ app.get("/order", function (req, res) {
   res.render("orderPage");
 });
 
+// admin panel
 app.get("/admin", function (req, res) {
   res.render("admin", {});
 });
 
+// adminPanel orders
 app.get("/admin-orders", function (req, res) {
   con.query(
-    "SELECT *, from_unixtime(date, '%D %M %Y %H:%i:%s') as unix_timestapm FROM shop_order ORDER BY id DESC",
+    `SELECT 
+      shop_order.id as id,
+      shop_order.user_id as user_id,
+      shop_order.goods_id as goods_id,
+      shop_order.goods_cost as goods_cost,
+      shop_order.goods_amount as goods_amount,
+      shop_order.total as total,
+      from_unixtime(date, '%D %M %Y %H:%i:%s') as unix_timestapm,
+      user_info.user_name as user,
+      user_info.user_phone as phone,
+      user_info.adress as adress
+    FROM 
+      shop_order
+    LEFT JOIN	
+      user_info
+    ON shop_order.user_id = user_info.id ORDER BY id DESC`,
     function (err, result, fileds) {
+      console.log(result);
       if (err) throw err;
       res.render("orderPanel", { orders: JSON.parse(JSON.stringify(result)) });
     }
@@ -197,10 +215,8 @@ function savingOrder(data, res) {
       },${res[i]["cost"]},${data.key[res[i]["id"]]},${
         data.key[res[i]["id"]] * res[i]["cost"]
       })`;
-
       con.query(sqlRequest, function (error, result) {
         if (error) throw error;
-
         console.log("saved");
       });
     }
