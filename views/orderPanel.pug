@@ -1,1 +1,22 @@
-h2 Hi there
+include header 
+
+h1 ADMIN PANEL 
+h3 ИНФОРМАЦИЯ О ЗАКАЗЕ
+table(class='table admin-table table-striped table-bordered')
+    tr
+        th id
+        th Дата
+        th ID пользователя
+        th ID товара
+        th Стоимость
+        th Кол-во
+        th Общая сумма
+    each val, index in orders  
+        tr    
+            td= val['id']
+            td= val['unix_timestapm']
+            td= val['user_id']
+            td= val['goods_id']
+            td= val['goods_cost']
+            td= val['goods_amount']
+            td= val['total']

@@ -72,3 +72,9 @@ ul.category-list a {
   width: 800px;
   margin: 0 auto;
 }
+
+/* =========== admin =========== */
+
+.admin-table {
+  text-align: center;
+}
