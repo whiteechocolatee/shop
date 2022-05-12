@@ -110,6 +110,17 @@ app.get("/order", function (req, res) {
   res.render("orderPage");
 });
 
+app.get("/admin", function (req, res) {
+  res.render("admin", {});
+});
+
+app.get("/admin-orders", function (req, res) {
+  con.query("SELECT * FROM shop_order", function (err, result, fileds) {
+    if (err) throw err;
+    res.render("orderPanel", { result });
+  });
+});
+
 // adding goods to cart at nav
 app.post("/get-category-list", function (req, res) {
   con.query("SELECT id,category FROM category", function (err, result, fileds) {
