@@ -4,19 +4,25 @@ h1 ADMIN PANEL
 h3 ИНФОРМАЦИЯ О ЗАКАЗЕ
 table(class='table admin-table table-striped table-bordered')
     tr
-        th id
-        th Дата
-        th ID пользователя
-        th ID товара
-        th Стоимость
-        th Кол-во
-        th Общая сумма
+        th(scope='col') id
+        th(scope='col') Дата
+        th(scope='col') ID пользователя
+        th(scope='col') ID товара
+        th(scope='col') Стоимость
+        th(scope='col') Кол-во
+        th(scope='col') Пользователь
+        th(scope='col') Телефон
+        th(scope='col') Адрес
+        th(scope='col') Общая сумма
     each val, index in orders  
         tr    
-            td= val['id']
+            th(scope='col')= val['id']
             td= val['unix_timestapm']
-            td= val['user_id']
+            td= val['user_id'] 
             td= val['goods_id']
             td= val['goods_cost']
             td= val['goods_amount']
+            td= val['user']
+            td= val['phone'] 
+            td= val['adress'] 
             td= val['total']
