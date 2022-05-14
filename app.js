@@ -23,6 +23,9 @@ const con = mysql.createConnection({
 // reading json
 app.use(express.json());
 
+// adding middleware function for parsing requset body
+app.use(express.urlencoded());
+
 // adding static files to server
 app.use(express.static(__dirname + "/public"));
 
@@ -145,6 +148,36 @@ app.get("/admin-orders", function (req, res) {
 // create login to admin panel
 app.get("/login", function (req, res) {
   res.render("loginPage", {});
+});
+
+// posting login data
+app.post("/login", function (req, res) {
+  console.log(req.body.login);
+
+  console.log(req.body.password);
+
+  con.query(
+    `SELECT * FROM admins WHERE login='${req.body.login}' and password='${req.body.password}'`,
+    function (err, result) {
+      if (err) throw err;
+
+      if (result.length == 0 || result == null) {
+        res.redirect("/login");
+      } else {
+        result = JSON.parse(JSON.stringify(result));
+
+        res.cookie("hash", "nnwrblshop");
+
+        let sqlRequest = `UPDATE admins SET hash="nnwrblshop" WHERE id=${result[0]["id"]}`;
+
+        con.query(sqlRequest, function (err) {
+          if (err) throw err;
+
+          res.redirect("/admin");
+        });
+      }
+    }
+  );
 });
 
 // adding goods to cart at nav
