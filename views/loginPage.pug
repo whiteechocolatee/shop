@@ -1,0 +1,12 @@
+include header
+
+div(class='container')
+    h1 login panel
+    form(action='/admin' class='mb-3')
+        div(class='mb-3')
+            label(for='loginInput' class='form-label') login
+            input(class="form-control" id="loginInput" value='nnwrblshop')
+        div(class='mb-3')
+            label(for='passInput' class='form-label') password
+            input(type='password' class="form-control" id="passInput" value='P@ssw0rd_nnwrblshop')
+        button(type="submit" class="btn btn-primary") Submit
