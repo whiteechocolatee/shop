@@ -142,6 +142,11 @@ app.get("/admin-orders", function (req, res) {
   );
 });
 
+// create login to admin panel
+app.get("/login", function (req, res) {
+  res.render("loginPage", {});
+});
+
 // adding goods to cart at nav
 app.post("/get-category-list", function (req, res) {
   con.query("SELECT id,category FROM category", function (err, result, fileds) {
