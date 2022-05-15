@@ -2,6 +2,9 @@
 const express = require("express");
 const app = express();
 
+//connect cookie parser
+const cookieParser = require("cookie-parser");
+
 // connect db
 const mysql = require("mysql");
 
@@ -11,6 +14,10 @@ const hostname = "127.0.0.1";
 
 // nodemailer
 const nodemailer = require("nodemailer");
+
+// add hashValidator & 
+const hashValidation = require("./public/js/hashValidation");
+const hashGeneration = require("./public/js/hashGeneration");
 
 // create connection to db
 const con = mysql.createConnection({
@@ -26,8 +33,20 @@ app.use(express.json());
 // adding middleware function for parsing requset body
 app.use(express.urlencoded());
 
+// adding cookie parser
+app.use(cookieParser());
+
 // adding static files to server
 app.use(express.static(__dirname + "/public"));
+
+// adding hash validation to admin panel
+app.use((req, res, next) => {
+  if (req.originalUrl == "/admin" || req.originalUrl == "/admin-orders") {
+    hashValidation(res, req, con, next);
+  } else {
+    next();
+  }
+});
 
 // adding pug
 app.set("view engine", "pug");
@@ -138,7 +157,6 @@ app.get("/admin-orders", function (req, res) {
       user_info
     ON shop_order.user_id = user_info.id ORDER BY id DESC`,
     function (err, result, fileds) {
-      console.log(result);
       if (err) throw err;
       res.render("orderPanel", { orders: JSON.parse(JSON.stringify(result)) });
     }
@@ -152,10 +170,6 @@ app.get("/login", function (req, res) {
 
 // posting login data
 app.post("/login", function (req, res) {
-  console.log(req.body.login);
-
-  console.log(req.body.password);
-
   con.query(
     `SELECT * FROM admins WHERE login='${req.body.login}' and password='${req.body.password}'`,
     function (err, result) {
@@ -166,9 +180,13 @@ app.post("/login", function (req, res) {
       } else {
         result = JSON.parse(JSON.stringify(result));
 
-        res.cookie("hash", "nnwrblshop");
+        let hash = hashGeneration(32);
 
-        let sqlRequest = `UPDATE admins SET hash="nnwrblshop" WHERE id=${result[0]["id"]}`;
+        res.cookie("hash", hash);
+        res.cookie("id", result[0]["id"]);
+
+        // update hash
+        let sqlRequest = `UPDATE admins SET hash="${hash}" WHERE id=${result[0]["id"]}`;
 
         con.query(sqlRequest, function (err) {
           if (err) throw err;
@@ -255,7 +273,6 @@ function savingOrder(data, res) {
       })`;
       con.query(sqlRequest, function (error, result) {
         if (error) throw error;
-        console.log("saved");
       });
     }
   });
