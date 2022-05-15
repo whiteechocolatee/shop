@@ -2,8 +2,10 @@ include header
 
 div(class='container')
     h1 ADMIN PANEL 
+
+    a(href="/admin" class='btn btn-primary') Назад <- 
     h3 ИНФОРМАЦИЯ О ЗАКАЗЕ
-    table(class='table admin-table table-striped table-bordered')
+    table(class='table admin-table table-responsive table-striped table-bordered')
         tr
             th(scope='col') id
             th(scope='col') Дата
@@ -24,6 +26,7 @@ div(class='container')
                 td= val['goods_cost']
                 td= val['goods_amount']
                 td= val['user']
-                td= val['phone'] 
+                td
+                    a(href='tel:'+val['phone'])= val['phone']
                 td= val['adress'] 
                 td= val['total']
