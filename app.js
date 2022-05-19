@@ -15,7 +15,7 @@ const hostname = "127.0.0.1";
 // nodemailer
 const nodemailer = require("nodemailer");
 
-// add hashValidator & 
+// add hashValidator &
 const hashValidation = require("./public/js/hashValidation");
 const hashGeneration = require("./public/js/hashGeneration");
 
@@ -55,6 +55,7 @@ app.set("view engine", "pug");
 app.listen(port, hostname, () => {
   console.log(`Server working on http://${hostname}:${port}`);
 });
+
 
 // getting main page
 app.get("/", function (req, res) {
