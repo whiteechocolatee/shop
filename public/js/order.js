@@ -1,3 +1,4 @@
+// getting form for validation
 let form = document.querySelector(".needs-validation");
 
 // client data for sending
@@ -8,46 +9,12 @@ let city = document.querySelector("#city");
 let state = document.querySelector("#state");
 let adress = document.querySelector("#validationTextarea");
 
-// adding phone number mask
-[].forEach.call(document.querySelectorAll(".tel"), function (input) {
-  let keyCode;
-  function mask(event) {
-    event.keyCode && (keyCode = event.keyCode);
-    let pos = this.selectionStart;
-    if (pos < 3) event.preventDefault();
-    let matrix = "+38 (___) ___ ____",
-      i = 0,
-      def = matrix.replace(/\D/g, ""),
-      val = this.value.replace(/\D/g, ""),
-      new_value = matrix.replace(/[_\d]/g, function (a) {
-        return i < val.length ? val.charAt(i++) || def.charAt(i) : a;
-      });
-    i = new_value.indexOf("_");
-    if (i != -1) {
-      i < 5 && (i = 3);
-      new_value = new_value.slice(0, i);
-    }
-    let reg = matrix
-      .substr(0, this.value.length)
-      .replace(/_+/g, function (a) {
-        return "\\d{1," + a.length + "}";
-      })
-      .replace(/[+()]/g, "\\$&");
-    reg = new RegExp("^" + reg + "$");
-    if (
-      !reg.test(this.value) ||
-      this.value.length < 5 ||
-      (keyCode > 47 && keyCode < 58)
-    )
-      this.value = new_value;
-    if (event.type == "blur" && this.value.length < 5) this.value = "";
-  }
+//adding input mask for validation
+let maskOptions = {
+  mask: "+{38} (000) 000-00-00",
+};
 
-  input.addEventListener("input", mask, false);
-  input.addEventListener("focus", mask, false);
-  input.addEventListener("blur", mask, false);
-  input.addEventListener("keydown", mask, false);
-});
+let mask = IMask(number, maskOptions);
 
 // submit order
 form.addEventListener(
@@ -84,9 +51,9 @@ form.addEventListener(
               footer: '<a href="/">Продолжить покупки</a>',
             });
             setTimeout(() => {
-              // localStorage.clear();
-              // location.reload();
-              // window.location.replace("/");
+              localStorage.clear();
+              location.reload();
+              window.location.replace("/");
             }, 5000);
           } else if (body == "0") {
             Swal.fire({
