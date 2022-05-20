@@ -78,3 +78,16 @@ ul.category-list a {
 .admin-table {
   text-align: center;
 }
+
+.admin-btns button,
+.admin-btns a {
+  display: block;
+  width: 150px;
+  border: 1px solid black;
+}
+
+.admin-btns {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
