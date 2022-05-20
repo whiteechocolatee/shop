@@ -50,8 +50,8 @@ form.addEventListener(
               icon: "success",
               footer: '<a href="/">Продолжить покупки</a>',
             });
+            localStorage.clear();
             setTimeout(() => {
-              localStorage.clear();
               location.reload();
               window.location.replace("/");
             }, 5000);
