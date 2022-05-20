@@ -3,30 +3,37 @@ include header
 div(class='container')
     h1 ADMIN PANEL 
 
-    a(href="/admin" class='btn btn-primary') Назад <- 
+    div(class='admin-btns')
+        a(href="/admin" class='btn btn-primary') Назад <- 
+        button(class='btn btn-download btn-link') Импорт
+
     h3 ИНФОРМАЦИЯ О ЗАКАЗЕ
+
     table(class='table admin-table table-responsive table-striped table-bordered')
-        tr
-            th(scope='col') id
-            th(scope='col') Дата
-            th(scope='col') ID пользователя
-            th(scope='col') ID товара
-            th(scope='col') Стоимость
-            th(scope='col') Кол-во
-            th(scope='col') Пользователь
-            th(scope='col') Телефон
-            th(scope='col') Адрес
-            th(scope='col') Общая сумма
-        each val, index in orders  
-            tr    
-                th(scope='col')= val['id']
-                td= val['unix_timestapm']
-                td= val['user_id'] 
-                td= val['goods_id']
-                td= val['goods_cost']
-                td= val['goods_amount']
-                td= val['user']
-                td
-                    a(href='tel:'+val['phone'])= val['phone']
-                td= val['adress'] 
-                td= val['total']
+        thead 
+            tr
+                th(scope='col') id
+                th(scope='col') Дата
+                th(scope='col') ID пользователя
+                th(scope='col') ID товара
+                th(scope='col') Стоимость
+                th(scope='col') Кол-во
+                th(scope='col') Пользователь
+                th(scope='col') Телефон
+                th(scope='col') Адрес
+                th(scope='col') Общая сумма
+        tbody            
+            each val, index in orders  
+                tr    
+                    th(scope='col')= val['id']
+                    td= val['unix_timestapm']
+                    td= val['user_id'] 
+                    td= val['goods_id']
+                    td= val['goods_cost']
+                    td= val['goods_amount']
+                    td= val['user']
+                    td
+                        a(href='tel:'+val['phone'])= val['phone']
+                    td= val['adress'] 
+                    td= val['total']
+    include footer
