@@ -169,6 +169,10 @@ app.get("/login", function (req, res) {
   res.render("loginPage", {});
 });
 
+app.get("/agreement", function (req, res) {
+  res.render("agreement", {});
+});
+
 // posting login data
 app.post("/login", function (req, res) {
   con.query(
