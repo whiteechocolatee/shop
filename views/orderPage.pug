@@ -17,7 +17,7 @@ div(class='container-fluid')
                         div(class="invalid-feedback") Пожалуйста, укажите корректно вашу почту!
                     div(class="col-md-12")
                         label(for="phoneNumber" class="form-label") Номер телефона
-                        input(type="tel" minlength='17' id='phoneNumber' class="form-control tel" placeholder='38(000)000-00-00' required)
+                        input(type="tel" minlength='17' id='phoneNumber' class="form-control" placeholder='38(000)000-00-00' required)
                         div(class="invalid-feedback") Пожалуйста, укажите корректно номер телефона!
                     div(class='col-md-12')
                         label(for="validationTextarea" class="form-label") Данные для доставки
@@ -26,8 +26,8 @@ div(class='container-fluid')
                     div(class="col-12")
                         div(class='form-check')
                             input(class="form-check-input terms" type="checkbox" id="invalidCheck" required)
-                            label(class="form-check-label" for="invalidCheck") 
-                                a(href='/agreement') Я прочитал и согласен с правилами Пользовательского соглашения
+                            label(class="form-check-label" for="invalidCheck") Я прочитал и согласен с правилами 
+                                a(href='/agreement' class='terms-link') Пользовательского соглашения
                             div(class="invalid-feedback") Ознакомьтесь и подвердите
                     div(class="col-12")
                         button(class="btn btn-primary" type="submit") Submit form
