@@ -56,7 +56,6 @@ app.listen(port, hostname, () => {
   console.log(`Server working on http://${hostname}:${port}`);
 });
 
-
 // getting main page
 app.get("/", function (req, res) {
   // taking all goods for rendering main page
@@ -169,8 +168,19 @@ app.get("/login", function (req, res) {
   res.render("loginPage", {});
 });
 
+// agreement url for terms and coditions
 app.get("/agreement", function (req, res) {
   res.render("agreement", {});
+});
+
+app.get("/clear-table", function (req, res) {
+  con.query("TRUNCATE TABLE shop_order", function (err, result) {
+    if (err) throw err;
+    con.query("TRUNCATE TABLE user_info", function (err, result) {
+      if (err) throw err;
+    });
+    res.redirect("/admin-orders");
+  });
 });
 
 // posting login data
