@@ -31,7 +31,7 @@ form.addEventListener(
           userName: username.value.trim(),
           email: email.value.trim(),
           phoneNumber: number.value,
-          adress: adress.value.trim(),
+          adress: String(adress.value.trim()),
           key: JSON.parse(localStorage.getItem("cart")),
         }),
         headers: {
