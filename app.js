@@ -165,10 +165,10 @@ app.get("/admin-orders", function (req, res) {
 
 // rendering admin goods
 app.get("/admin-goods", function (req, res) {
-  // con.query(sql, function (err, result, fileds) {
-  // if (err) throw err;
-  res.render("adminGoods");
-  // });
+  con.query("SELECT * FROM goods", function (err, result, fileds) {
+    if (err) throw err;
+    res.render("adminGoods", { goods: JSON.parse(JSON.stringify(result)) });
+  });
 });
 
 // create login to admin panel
