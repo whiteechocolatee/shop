@@ -163,6 +163,14 @@ app.get("/admin-orders", function (req, res) {
   );
 });
 
+// rendering admin goods
+app.get("/admin-goods", function (req, res) {
+  // con.query(sql, function (err, result, fileds) {
+  // if (err) throw err;
+  res.render("adminGoods");
+  // });
+});
+
 // create login to admin panel
 app.get("/login", function (req, res) {
   res.render("loginPage", {});
@@ -173,10 +181,14 @@ app.get("/agreement", function (req, res) {
   res.render("agreement", {});
 });
 
+// func for clearing order table
 app.get("/clear-table", function (req, res) {
-  con.query("TRUNCATE TABLE shop_order", function (err, result) {
+  let sqlTruncateOrders = "TRUNCATE TABLE shop_order";
+  let sqlTruncateUsers = "TRUNCATE TABLE user_info";
+
+  con.query(sqlTruncateOrders, function (err, result) {
     if (err) throw err;
-    con.query("TRUNCATE TABLE user_info", function (err, result) {
+    con.query(sqlTruncateUsers, function (err, result) {
       if (err) throw err;
     });
     res.redirect("/admin-orders");
