@@ -79,6 +79,7 @@ ul.category-list a {
 
 /* =========== admin =========== */
 
+/* =========== admin table =========== */
 .admin-table {
   text-align: center;
 }
@@ -96,6 +97,7 @@ ul.category-list a {
   margin: 20px 0;
 }
 
+/* =========== admin goods =========== */
 .cards-gallery {
   display: flex;
   justify-content: center;
@@ -109,7 +111,7 @@ ul.category-list a {
 }
 
 .admin-img {
-  max-width: 100%;
+  max-width: 102%;
   height: auto;
 }
 
@@ -122,8 +124,55 @@ span b {
   color: red;
 }
 
-/* =========== admin =========== */
-@media (max-width: 767px) {
+.card-head {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-head h5 {
+  width: 250px;
+}
+
+.card-head a {
+  color: blue;
+}
+
+/* =========== admin add new items =========== */
+
+.content h3 {
+  text-align: center;
+}
+
+.card-holder {
+  margin: 50px auto 0 auto;
+  width: 700px;
+  height: 375px;
+  border: 1px solid black;
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-img {
+  border: 1px solid black;
+  width: 300px;
+  height: 375px;
+  overflow: hidden;
+}
+
+.card-description {
+  width: 395px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 5px;
+}
+
+@media (max-width: 1199px) {
+  /* =========== admin goods =========== */
   .admin-card {
     min-height: 620px;
     width: 300px;
@@ -134,10 +183,14 @@ span b {
     max-width: 300px;
     height: auto;
   }
+
+  .card-body {
+    width: 300px;
+  }
 }
 
-/* =========== admin =========== */
 @media (max-width: 375px) {
+  /* =========== admin goods =========== */
   .admin-card {
     min-height: 620px;
     width: 250px;

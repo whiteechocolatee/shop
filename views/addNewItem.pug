@@ -1,0 +1,38 @@
+include header
+
+div(class='container')
+    div(class='row')
+        div(class='admin-btns')
+            a(href="/admin-goods" class='btn btn-primary') Назад <- 
+            a(href="/admin" class='btn btn-primary') На главную 
+        div(class='content')
+            h3 Добавьте свой товар
+            form(action="/add-new-photo" class='save-img needs-validation' method='post' enctype='multipart/form-data') 
+                label Выберите фото
+                br
+                input(type="file" class='added-img' title='Text' name='image')
+                div(class='card-holder')
+                    div(class='card-content')
+                        div(class='card-img')
+                            img(alt='Ваша картинка' id="img1")
+                        div(class='card-description')
+                            div
+                                label(for='item-name') Наименование товара&nbsp;
+                                input(name='item-name' id='item-name' type="text" required)
+                            div
+                                label(for='item-description') Введите описание
+                                textarea(name="item-description" id='item-description' cols="30" rows="5" required)
+                            div
+                                label(for='item-cost') Укажите цену&nbsp;
+                                input(name='item-cost' id='item-cost' type="number" required) 
+                                small &nbsp; uah
+                            div
+                                label(for="select-category") Выбор категории&nbsp; 
+                                select(name="select-category" id='item-category')
+                                    option(value="1") Мужское-1
+                                    option(value="2") Женское-2
+
+                button(type="submit" class='btn btn-success') Добавить карточку
+
+    script(src='js/addItem.js')
+    include footer
