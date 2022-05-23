@@ -37,4 +37,10 @@ div(class='container')
                         a(href='tel:'+val['phone'])= val['phone']
                     td= val['adress'] 
                     td= val['total']
+
+
+    // adding script to sorting table of orders, and convert html table to excel
+    script(src="js/table2excel.js")
+    script(src="js/tablesort.min.js")
+    script(src="js/orderTable.js")
     include footer
