@@ -15,6 +15,21 @@ const hostname = "127.0.0.1";
 // nodemailer
 const nodemailer = require("nodemailer");
 
+// multer
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/images");
+  },
+  filename: (req, file, cb) => {
+    console.log(file);
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
 // add hashValidator &
 const hashValidation = require("./public/js/hashValidation");
 const hashGeneration = require("./public/js/hashGeneration");
@@ -193,6 +208,17 @@ app.get("/clear-table", function (req, res) {
     });
     res.redirect("/admin-orders");
   });
+});
+
+//adding new item
+app.get("/add-new-item", function (req, res) {
+  res.render("addNewItem");
+});
+
+// saving image to folder
+
+app.post("/add-new-item", upload.single("image"), function (req, res) {
+  res.redirect('/add-new-item');
 });
 
 // posting login data
