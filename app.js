@@ -23,7 +23,6 @@ const storage = multer.diskStorage({
     cb(null, "public/images");
   },
   filename: (req, file, cb) => {
-    console.log(file);
     cb(null, file.originalname);
   },
 });
@@ -216,9 +215,20 @@ app.get("/add-new-item", function (req, res) {
 });
 
 // saving image to folder
+app.post("/add-new-photo", upload.single("image"), function (req, res) {
+  res.redirect("/admin-goods");
+});
 
+// saving new goods to data base
 app.post("/add-new-item", upload.single("image"), function (req, res) {
-  res.redirect('/add-new-item');
+  let data = req.body;
+
+  con.query(
+    `INSERT INTO goods (name, description, cost, image, category) VALUES ('${data.name}','${data.description}','${data.cost}','${data.image}','${data.category}')`,
+    function (err, result) {
+      if (err) throw err;
+    }
+  );
 });
 
 // posting login data
