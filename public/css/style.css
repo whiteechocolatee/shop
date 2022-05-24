@@ -148,6 +148,7 @@ span b {
   width: 700px;
   height: 375px;
   border: 1px solid black;
+  overflow: scroll;
 }
 
 .card-content {
