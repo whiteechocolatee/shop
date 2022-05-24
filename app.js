@@ -140,6 +140,7 @@ app.get("/goods", function (req, res) {
     res.render("goods", { goods: JSON.parse(JSON.stringify(result)) });
   });
 });
+//
 
 // render order page
 app.get("/order", function (req, res) {
@@ -214,13 +215,66 @@ app.get("/add-new-item", function (req, res) {
   res.render("addNewItem");
 });
 
+//
+app.get("/edit", function (req, res) {
+  con.query("SELECT * FROM goods WHERE id=" + req.query.id, function (
+    err,
+    result,
+    fields
+  ) {
+    if (err) throw err;
+    res.render("editPage", { goods: JSON.parse(JSON.stringify(result)) });
+  });
+});
+
 // saving image to folder
 app.post("/add-new-photo", upload.single("image"), function (req, res) {
   res.redirect("/admin-goods");
 });
 
+// saving edited image to folder
+app.post("/upload-edited-image", upload.single("editedImage"), function (
+  req,
+  res
+) {
+  res.redirect("/admin-goods");
+});
+
+// update data goods
+app.post("/update-item", function (req, res) {
+  let data = req.body;
+  let sqlRequest;
+
+  if (data.image === undefined) {
+    sqlRequest = `
+    UPDATE goods 
+    SET name = '${data.name}',
+        description = '${data.description}',
+        cost = '${data.cost}',
+        category = '${data.category}'
+    WHERE id = ${data.id}
+    `;
+  } else {
+    sqlRequest = `
+    UPDATE goods 
+    SET name = '${data.name}',
+        description = '${data.description}',
+        cost = '${data.cost}',
+        image = '${data.image}',
+        category = '${data.category}'
+    WHERE id = ${data.id}
+    `;
+  }
+
+  con.query(sqlRequest, function (err) {
+    if (err) throw err;
+  });
+
+  res.send("1");
+});
+
 // saving new goods to data base
-app.post("/add-new-item", upload.single("image"), function (req, res) {
+app.post("/add-new-item", function (req, res) {
   let data = req.body;
 
   con.query(
@@ -229,6 +283,7 @@ app.post("/add-new-item", upload.single("image"), function (req, res) {
       if (err) throw err;
     }
   );
+  res.send("1");
 });
 
 // posting login data
