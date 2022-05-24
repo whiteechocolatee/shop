@@ -1,0 +1,38 @@
+include header 
+
+div(class='container')
+    h2 Редактирование товара
+    div(class='row')
+        div(class='admin-btns')
+                a(href="/admin-goods" class='btn btn-primary') Назад <- 
+                a(href="/admin" class='btn btn-primary') На главную 
+        form(action="/upload-edited-image" class='update-form-img needs-validation' method='post' enctype='multipart/form-data') 
+            label Выберите фото
+            br
+            input(type="file" class='update-img' title='Text' name='editedImage')
+            each val,index in goods
+                div(class='card-holder')
+                    div(class='card-content')
+                        div(class='card-img')
+                            img(src='./images/'+val['image'] class='admin-img rounded' id="img1")
+                        div(class='card-description')
+                            div
+                                label(for='item-edit-name') Обновление наименования товара&nbsp;
+                                input(name='item-edit-name' class='update-name' type="text" value=val['name'] required)
+                            div
+                                label(for='item-edit-description') Обновите описание
+                                textarea(name="item-edit-description" class='update-description' cols="40" rows="7" required)= val['description']
+                            div
+                                label(for='item-edit-cost') Обновите цену&nbsp;
+                                input(name='item-edit-cost' class='update-cost' value=val['cost'] type="number" required) 
+                                small &nbsp; uah
+                            div
+                                label(for="select-category") Обовите категории&nbsp; 
+                                select(name="select-category" class='update-category')
+                                    option(value="1") Мужское-1
+                                    option(value="2") Женское-2
+                            div
+                                span(class='id')= val['id']
+            button(type="submit" class='btn btn-success') Обновить
+        script(src='js/editItem.js')
+        include footer
