@@ -24,7 +24,7 @@ function getCategoryList() {
 
 // rendering navigation
 function showCategoryList(data) {
-  let out = `<ul><li class='category-list'><a href='/'>Main</a></li>`;
+  let out = `<ul><li class='category-list'><a href='/'>Главная</a></li>`;
   for (let i = 0; i < data.length; i++) {
     out += `<li><a href='/cat?id=${data[i]["id"]}'>${data[i]["category"]}</a></li>`;
   }

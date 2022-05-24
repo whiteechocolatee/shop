@@ -1,4 +1,4 @@
-let form = document.querySelector(".save-img");
+let addingForm = document.querySelector(".save-img");
 let inputFile = document.querySelector(".added-img");
 let cardWrapper = document.querySelector(".card-img");
 let itemName = document.querySelector("#item-name");
@@ -34,14 +34,14 @@ inputFile.addEventListener("change", function (event) {
   imageName = target.files[0].name;
 });
 
-form.addEventListener("submit", function (e) {
+addingForm.addEventListener("submit", function (e) {
   fetch("/add-new-item", {
     method: "POST",
     body: JSON.stringify({
       name: itemName.value.trim(),
       description: itemDesc.value.trim(),
       cost: itemCost.value.trim(),
-      image: imageName.trim(),
+      image: imageName,
       category: itemCat.value.trim(),
     }),
     headers: {
