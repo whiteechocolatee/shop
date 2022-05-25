@@ -1,16 +1,14 @@
-div(class='col-md-3 cards')
-    div(class='card' style='width:18rem;')
-        div(class='content-block text-center')
-            a(href='goods?id='+val['id'])
-                img(
-                    src='./images/'+val['image']
-                    alt='item'
-                    class='card-img-top img'
-                    )
-                div(class='card-body text-center')
-                    h5(class='card-title')= val['name']
-                    p(class='card-text')= val['description']
-            button(
-            data-goods_id= val['id']
-            class="btn btn-primary add-to-cart"
-                ) add to cart
+div(class='main-card')
+    img(class='bg-img' src='./images/'+val['image'] alt='фото товара')
+    div(class='main-card-content')
+        a(href='goods?id='+val['id'])
+            h2(class='title')= val['name']
+            p(class='copy')= val['description']
+            p #{val['cost']}₴
+        button(
+        data-goods_id= val['id']
+        class="button-card add-to-cart"
+            ) Купить
+
+
+
