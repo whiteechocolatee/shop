@@ -1,11 +1,12 @@
-let addingForm = document.querySelector(".save-img");
-let inputFile = document.querySelector(".added-img");
-let cardWrapper = document.querySelector(".card-img");
-let itemName = document.querySelector("#item-name");
-let itemDesc = document.querySelector("#item-description");
-let itemCost = document.querySelector("#item-cost");
-let itemCat = document.querySelector("#item-category");
+let updatingForm = document.querySelector(".update-form-img");
+let inputFile = document.querySelector(".update-img");
+let itemName = document.querySelector(".update-name");
+let itemDesc = document.querySelector(".update-description");
+let itemCost = document.querySelector(".update-cost");
+let itemCat = document.querySelector(".update-category");
+let idOfItem = document.querySelector(".id");
 let imageName;
+
 
 // showing preview of card image
 inputFile.addEventListener("change", function (event) {
@@ -34,8 +35,8 @@ inputFile.addEventListener("change", function (event) {
   imageName = target.files[0].name;
 });
 
-addingForm.addEventListener("submit", function (e) {
-  fetch("/add-new-item", {
+updatingForm.addEventListener("submit", function () {
+  fetch("/update-item", {
     method: "POST",
     body: JSON.stringify({
       name: itemName.value.trim(),
@@ -43,6 +44,7 @@ addingForm.addEventListener("submit", function (e) {
       cost: itemCost.value.trim(),
       image: imageName,
       category: itemCat.value.trim(),
+      id: Number(idOfItem.innerHTML),
     }),
     headers: {
       Accept: "application/json",
@@ -54,7 +56,7 @@ addingForm.addEventListener("submit", function (e) {
     })
     .then(function (body) {
       if (body == "1") {
-        alert("Товар добавлен!");
+        alert("Товар обновлен!");
       } else if (body == "0") {
         alert("Произошла ошибка!");
       }

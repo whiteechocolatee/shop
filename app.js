@@ -75,7 +75,7 @@ app.get("/", function (req, res) {
   // taking all goods for rendering main page
   let goodsName = new Promise(function (resolve, reject) {
     con.query(
-      "SELECT id,name,cost,image,category FROM (SELECT id,name,cost,image,category, IF(IF(@curr_category != category,@curr_category := category,'')!= '',@k := 0, @k := @k+1) as ind FROM goods, (SELECT @curr_category := '') v ) goods WHERE ind < 4",
+      "SELECT id,name,description,cost,image,category FROM (SELECT id,name,description,cost,image,category, IF(IF(@curr_category != category,@curr_category := category,'')!= '',@k := 0, @k := @k+1) as ind FROM goods, (SELECT @curr_category := '') v ) goods WHERE ind < 4",
       function (err, result) {
         if (err) reject(err);
         resolve(result);

@@ -2,10 +2,11 @@ include header
 
 include navigationHeader
 
-div(class='container')
-    div(class='row')
-        h1 name of category
-        div(class='col-lg-12')
+div(class='container-fluid')
+
+    h1 name of category
+    div(class='col-lg-12')
+        div(class='cards-container')
             each val,index in goods ? goods : ['There is no value']
                 include cards
     div= category[0]['description']
