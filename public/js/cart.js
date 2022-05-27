@@ -39,10 +39,10 @@ function ajaxGetGoodsInfo() {
     });
 }
 
-
 // rendering cart
 function showCart(data) {
   let out = `<table class="table table-striped table-cart"><tbody>`;
+  let totalItemCart = 0;
   let totalCart = 0;
 
   for (let key in cart) {
@@ -53,10 +53,18 @@ function showCart(data) {
     out += `<td>${data[key]["cost"] * cart[key]}</td></tr>`;
     out += `</tr>`;
     totalCart += cart[key] * data[key]["cost"];
+    totalItemCart += cart[key];
   }
-  out += `<tr><td colspan="3">Total: </td><td>${totalCart}</td></tr>`;
+  out += `<tr><td colspan="3">Total: ${totalItemCart}</td><td>${totalCart}</td></tr>`;
   out += `</tbody></table>`;
 
+  if (totalItemCart > 0) {
+    document.querySelector(".total-items").style.opacity = "100%";
+  } else {
+    document.querySelector(".total-items").style.opacity = "0%";
+  }
+
+  document.querySelector(".total-items").innerHTML = totalItemCart;
   document.querySelector("#cart-nav").innerHTML = out;
 
   document.querySelectorAll(".cart-add").forEach((el) => {
