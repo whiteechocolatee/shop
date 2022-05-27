@@ -28,32 +28,10 @@ body {
 }
 
 body {
-  margin: 0;
-  background: linear-gradient(45deg, #E0EAFC, #e9e4f0);
-  background-size: 200% 200%;
-  animation: gradient 6s linear infinite;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0 50%;
-  }
+  background-color: #f8f8f8;
 }
 
 /* =========== cards =========== */
-
-.img {
-  margin: 0 auto;
-  max-width: 50%;
-  height: auto;
-  padding: 20px;
-}
 
 .cards {
   height: 500px;
@@ -79,16 +57,7 @@ body {
   max-width: 1024px;
   margin: 0 auto;
 }
-@media (min-width: 630px) {
-  .cards-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (min-width: 925px) {
-  .cards-container {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
+
 .main-card {
   box-sizing: border-box;
   position: relative;
@@ -103,11 +72,6 @@ body {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1),
     0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1),
     0 16px 16px rgba(0, 0, 0, 0.1);
-}
-@media (min-width: 600px) {
-  .main-card {
-    height: 350px;
-  }
 }
 
 .main-card:after {
@@ -151,7 +115,7 @@ body {
   padding: 1rem;
   transition: transform var(--d) var(--e);
   z-index: 1;
-  height: 100%;
+  height: 80%;
   overflow: scroll;
 }
 
@@ -185,6 +149,45 @@ body {
   outline: 1px dashed yellow;
   outline-offset: 3px;
 }
+
+.bg-img {
+  position: absolute;
+  align-items: center;
+  width: 110%;
+  height: auto;
+  left: 0;
+  top: 0;
+}
+
+@media (max-width: 1200px) {
+  .bg-img {
+    position: absolute;
+    align-items: center;
+    width: 120%;
+    height: auto;
+    left: -15px;
+    top: 0;
+  }
+}
+
+@media (min-width: 650px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 991px) {
+  .cards-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 600px) {
+  .main-card {
+    height: 350px;
+  }
+}
+
 @media (hover: hover) and (min-width: 600px) {
   .main-card:after {
     transform: translateY(0);
@@ -227,43 +230,97 @@ body {
   }
 }
 
-.bg-img {
-  position: absolute;
-  align-items: center;
-  width: 110%;
-  height: auto;
+/* =========== header navigation =========== */
+
+.navbar {
+  z-index: 500;
   left: 0;
   top: 0;
+  width: 100%;
+  background-color: white;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 7px 1px rgba(0, 0, 0, 0.5);
+  margin-bottom: 30px;
 }
 
-/* =========== navigation =========== */
-
-.site-nav {
-  width: 300px;
-  min-height: 100vh;
+.navbar_scrolled {
   position: fixed;
-  left: -300px;
-  top: 45px;
-  z-index: 999;
-  padding: 10px;
-  transition: all ease 1s;
-  color: white;
+  animation-name: fadeInUp;
+  animation-duration: 1s;
 }
 
-.close-btn-div {
-  text-align: right;
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.show-nav {
-  position: relative;
+.navbar__brand {
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+  font-size: 1.5rem;
+  transition: all 0.09s ease-out;
 }
 
-ul.category-list {
-  list-style-type: disc;
+.navbar__brand:hover {
+  color: coral;
 }
 
-ul.category-list a {
-  color: grey;
+.navbar__nav {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.navbar__nav li {
+  display: inline-block;
+}
+
+.navbar__nav li a {
+  padding: 12px;
+  color: black;
+  opacity: 0.7;
+  text-decoration: none;
+  font-weight: 400;
+  transition: all 0.09s ease-out;
+}
+
+.navbar__nav li a:hover {
+  opacity: 1;
+}
+
+.total-items {
+  width: 20px;
+  opacity: 0%;
+  text-align: center;
+  background: red;
+  border-radius: 50%;
+  font-size: 15px;
+  /* left: -10px; */
+  position: absolute;
+  z-index: 500;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    top: -50px;
+  }
+  to {
+    opacity: 1;
+    top: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .navbar__brand {
+    font-weight: 500;
+    font-size: 1.2rem;
+    align-items: center;
+  }
 }
 
 /* =========== order form =========== */
@@ -276,8 +333,6 @@ ul.category-list a {
 .terms-link {
   text-decoration: underline;
 }
-
-/* =========== admin =========== */
 
 /* =========== admin table =========== */
 .admin-table {
@@ -298,6 +353,7 @@ ul.category-list a {
 }
 
 /* =========== admin goods =========== */
+
 .cards-gallery {
   display: flex;
   justify-content: center;
@@ -373,7 +429,6 @@ span b {
 }
 
 @media (max-width: 1199px) {
-  /* =========== admin goods =========== */
   .admin-card {
     min-height: 620px;
     width: 300px;
@@ -391,7 +446,6 @@ span b {
 }
 
 @media (max-width: 375px) {
-  /* =========== admin goods =========== */
   .admin-card {
     min-height: 620px;
     width: 250px;
