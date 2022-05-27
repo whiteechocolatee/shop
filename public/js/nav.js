@@ -1,15 +1,10 @@
-document.querySelector(".close-nav").onclick = closeNav;
-document.querySelector(".show-nav").onclick = showNav;
+let navbar = document.getElementById("navbar").classList;
+let active_class = "navbar_scrolled";
 
-// open nav
-function closeNav() {
-  document.querySelector(".site-nav").style.left = "-300px";
-}
-
-// close nav
-function showNav() {
-  document.querySelector(".site-nav").style.left = "0";
-}
+window.addEventListener("scroll", (e) => {
+  if (pageYOffset > 500) navbar.add(active_class);
+  else navbar.remove(active_class);
+});
 
 // sending request to getting categories
 function getCategoryList() {
@@ -24,11 +19,11 @@ function getCategoryList() {
 
 // rendering navigation
 function showCategoryList(data) {
-  let out = `<ul><li class='category-list'><a href='/'>Главная</a></li>`;
+  let out = `<ul class="navbar__nav"><li><a href='/'>Главная</a></li>`;
   for (let i = 0; i < data.length; i++) {
-    out += `<li><a href='/cat?id=${data[i]["id"]}'>${data[i]["category"]}</a></li>`;
+    out += `<li><a href='/cat?id=${data[i]["id"]}' target='_blank'>${data[i]["category"]}</a></li>`;
   }
-  out += `</ul`;
+  out += `<li class='cart-header navbar__nav ordered'><h3><a href='/order'><i class="bi bi-bag"></i><span class='total-items'></span></a></h3></li></ul>`;
 
   document.querySelector("#category-list").innerHTML = out;
 }
