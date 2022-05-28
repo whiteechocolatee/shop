@@ -2,7 +2,7 @@ let navbar = document.getElementById("navbar").classList;
 let active_class = "navbar_scrolled";
 
 window.addEventListener("scroll", (e) => {
-  if (pageYOffset > 500) navbar.add(active_class);
+  if (pageYOffset > 800) navbar.add(active_class);
   else navbar.remove(active_class);
 });
 
@@ -23,7 +23,15 @@ function showCategoryList(data) {
   for (let i = 0; i < data.length; i++) {
     out += `<li><a href='/cat?id=${data[i]["id"]}' target='_blank'>${data[i]["category"]}</a></li>`;
   }
-  out += `<li class='cart-header navbar__nav ordered'><h3><a href='/order'><i class="bi bi-bag"></i><span class='total-items'></span></a></h3></li></ul>`;
+  out += `<li class='cart-header navbar__nav ordered'>
+              <h3>
+                  <a href='/order' class='cart-counter'>
+                      <i class="bi bi-bag"></i>
+                      <span class='total-items'></span>
+                  </a>
+              </h3>
+          </li>
+      </ul>`;
 
   document.querySelector("#category-list").innerHTML = out;
 }
