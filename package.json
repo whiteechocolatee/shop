@@ -9,7 +9,8 @@
     "mysql": "^2.18.1",
     "nodemailer": "^6.7.5",
     "nodemon": "^2.0.15",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "tiny-slider": "^2.9.4"
   },
   "name": "internet_shop",
   "version": "1.0.0",
