@@ -245,6 +245,8 @@ body {
 
 /* =========== main page =========== */
 .first-page {
+  position: relative;
+  top: -100px;
   display: flex;
   padding: 0;
   justify-content: space-between;
@@ -253,15 +255,13 @@ body {
 
 .main-img-content {
   width: 70%;
-  height: 1100px;
   z-index: -9999;
-  position: relative;
-  top: -100px;
+  overflow: hidden;
 }
 
 .choice-item {
   width: 30%;
-  height: 750px;
+  height: 600px;
   display: flex;
   align-items: flex-end;
   position: relative;
@@ -276,39 +276,71 @@ body {
 .main-title {
   font-family: "Roboto", sans-serif;
   font-weight: lighter;
+  font-size: 2vw;
+}
+
+.title-description {
+  font-size: 1vw;
 }
 
 .second-img-content {
   width: 30%;
   height: auto;
-  position: relative;
-  top: -100px;
+}
+
+hr {
+  margin: 0.2rem 0;
 }
 
 .responsive-img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   object-position: 0 0;
 }
 
 .brand-name {
-  font-size: 125px;
+  font-size: 10vw;
   color: #f2f2f2;
   font-family: "CormorantGaramond", serif;
 }
 
 .brand-image {
   width: 100%;
-  height: 400px;
+  height: auto;
 }
 
 .about_brand-section {
-  width: 50%;
+  width: 55%;
+  height: auto;
+}
+
+.about_brand-section img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1024px) {
+  .responsive-img {
+    width: 100%;
+    height: auto;
+  }
+
+  .main-img-content {
+    max-height: 750px;
+  }
+
+  .choice-item {
+    height: 200px;
+  }
 }
 
 .item-description {
   text-align: center;
+}
+
+.item-description h2 {
+  font-size: 2.5vw;
 }
 
 .tns-outer button {
@@ -321,10 +353,25 @@ body {
   margin: 0 auto;
 }
 
+.my-slider .card {
+  margin: 0 auto;
+}
+
 .card {
-  margin: 0 25px;
-  /* width: 50%; */
-  height: 60%;
+  margin: 0 20px;
+  width: 400px;
+  height: auto;
+}
+
+.second-page {
+  margin-top: 30px;
+}
+
+@media (max-width: 790px) {
+  .card {
+    width: 300px;
+    height: auto;
+  }
 }
 
 /* =========== header navigation =========== */
@@ -339,7 +386,7 @@ header {
   left: 0;
   top: 0;
   width: 100%;
-  height: 70px;
+  height: 80px;
   display: flex;
   align-items: center;
 }
