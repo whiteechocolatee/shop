@@ -2,8 +2,11 @@ let navbar = document.getElementById("navbar").classList;
 let active_class = "navbar_scrolled";
 
 window.addEventListener("scroll", (e) => {
-  if (pageYOffset > 800) navbar.add(active_class);
-  else navbar.remove(active_class);
+  if (pageYOffset > 200) {
+    navbar.add(active_class);
+  } else {
+    navbar.remove(active_class);
+  }
 });
 
 // sending request to getting categories
@@ -21,7 +24,7 @@ function getCategoryList() {
 function showCategoryList(data) {
   let out = `<ul class="navbar__nav"><li><a href='/'>Главная</a></li>`;
   for (let i = 0; i < data.length; i++) {
-    out += `<li><a href='/cat?id=${data[i]["id"]}' target='_blank'>${data[i]["category"]}</a></li>`;
+    out += `<li><a href='/cat?id=${data[i]["id"]}'>${data[i]["category"]}</a></li>`;
   }
   out += `<li class='cart-header navbar__nav ordered'>
               <h3>
