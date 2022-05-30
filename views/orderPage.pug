@@ -2,38 +2,39 @@ include header
 
 include navigationHeader
 
-div(class='container-fluid')
-    div(class='container')
-        div(class='row')
-            h1 Форма для заказа
-            div(class='form-space')
-                div(id='cart-nav')
-                form(class='row g-3 needs-validation' novalidate)
-                    div(class='col-md-12')
-                        label(for='name' class='form-label') Имя
-                        input(type='text' class='form-control' id='name'  placeholder='Имя' required)
-                        div(class="invalid-feedback") Пожалуйста, укажите корректно имя!
-                    div(class="col-md-12")
-                        label(for="email" class="form-label") Почта
-                        input(type="email" class="form-control" id="email" placeholder="name@example.com" required)
-                        div(class="invalid-feedback") Пожалуйста, укажите корректно вашу почту!
-                    div(class="col-md-12")
-                        label(for="phoneNumber" class="form-label") Номер телефона
-                        input(type="tel" minlength='17' id='phoneNumber' class="form-control" placeholder='38(000)000-00-00' required)
-                        div(class="invalid-feedback") Пожалуйста, укажите корректно номер телефона!
-                    div(class='col-md-12')
-                        label(for="validationTextarea" class="form-label") Данные для доставки
-                        textarea(class="form-control" id="validationTextarea" rows='6' placeholder='Укажите данные для доставки (Город, область, район, способ доставки, № почтового отделения)' required)
-                        div(class="invalid-feedback") Пожалуйста, укажите корректно данные для доставки!
-                    div(class="col-12")
-                        div(class='form-check')
-                            input(class="form-check-input terms" type="checkbox" id="invalidCheck" required)
-                            label(class="form-check-label" for="invalidCheck") Я прочитал и согласен с правилами 
-                                a(href='/agreement' class='terms-link' target="_blank") Пользовательского соглашения
-                            div(class="invalid-feedback") Ознакомьтесь и подвердите
-                    div(class="col-12")
-                        button(class="btn btn-primary" type="submit") Submit form
-    
+div(class='wrapper')
+    div(class='container-fluid main-content')
+        div(class='container')
+            div(class='row')
+                h1 Форма для заказа
+                div(class='form-space')
+                    div(id='cart-nav')
+                    form(class='row g-3 needs-validation' novalidate)
+                        div(class='col-md-12')
+                            label(for='name' class='form-label') Имя
+                            input(type='text' class='form-control' id='name'  placeholder='Имя' required)
+                            div(class="invalid-feedback") Пожалуйста, укажите корректно имя!
+                        div(class="col-md-12")
+                            label(for="email" class="form-label") Почта
+                            input(type="email" class="form-control" id="email" placeholder="name@example.com" required)
+                            div(class="invalid-feedback") Пожалуйста, укажите корректно вашу почту!
+                        div(class="col-md-12")
+                            label(for="phoneNumber" class="form-label") Номер телефона
+                            input(type="tel" minlength='17' id='phoneNumber' class="form-control" placeholder='38(000)000-00-00' required)
+                            div(class="invalid-feedback") Пожалуйста, укажите корректно номер телефона!
+                        div(class='col-md-12')
+                            label(for="validationTextarea" class="form-label") Данные для доставки
+                            textarea(class="form-control" id="validationTextarea" rows='6' placeholder='Укажите данные для доставки (Город, область, район, способ доставки, № почтового отделения)' required)
+                            div(class="invalid-feedback") Пожалуйста, укажите корректно данные для доставки!
+                        div(class="col-12")
+                            div(class='form-check')
+                                input(class="form-check-input terms" type="checkbox" id="invalidCheck" required)
+                                label(class="form-check-label" for="invalidCheck") Я прочитал и согласен с правилами 
+                                    a(href='/agreement' class='terms-link' target="_blank") Пользовательского соглашения
+                                div(class="invalid-feedback") Ознакомьтесь и подвердите
+                        div(class="col-12")
+                            button(class="btn btn-primary" type="submit") Submit form
+        
     script(src="//cdn.jsdelivr.net/npm/sweetalert2@11")
     script(src="https://unpkg.com/imask")
     script(src="js/order.js")

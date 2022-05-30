@@ -2,20 +2,18 @@ include header
 
 include navigationHeader
 
-
-div(class='wrap main-content')
-    include mainContent
-    div(class='container-lg second-page')
-        div(class='container item-content')
-            div(class='item-description')    
-                h2(class='main-title') Вам может понравиться
-                hr(class='content-line-second')
-        div(class='col col-lg-12')
-            div(class='my-slider')
-                each val,index in goods
-                    a(href='goods?id='+val['id'])
-                        div(class="card")
-                            img(src='./images/'+val['image'] class="card-img-top" alt="...")
+div(class='wrapper')
+    div(class='wrap main-content')
+        include mainContent
+        div(class='container-lg second-page')
+            div(class='container item-content')
+                div(class='item-description')    
+                    h2(class='main-title') Вам может понравиться
+                    hr(class='content-line-second')
+            div(class='col col-lg-12')
+                include mainSlider
+                include smallDevice
+                            
     script(src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js")
     script(src="js/main.js")
     include footer 

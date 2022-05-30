@@ -1,46 +1,46 @@
 include header 
+div(class='wrapper')
+    div(class='container')
+        h1 ADMIN PANEL 
 
-div(class='container')
-    h1 ADMIN PANEL 
+        div(class='admin-btns')
+            a(href="/admin" class='btn btn-primary') Назад <- 
+            a(class='btn btn-danger clear-table' href='clear-table') Очистить
+            button(class='btn btn-download btn-link') Импорт
 
-    div(class='admin-btns')
-        a(href="/admin" class='btn btn-primary') Назад <- 
-        a(class='btn btn-danger clear-table' href='clear-table') Очистить
-        button(class='btn btn-download btn-link') Импорт
+        h3 ИНФОРМАЦИЯ О ЗАКАЗЕ
 
-    h3 ИНФОРМАЦИЯ О ЗАКАЗЕ
-
-    table(class='table admin-table table-responsive table-striped table-bordered')
-        thead 
-            tr
-                th(scope='col') id
-                th(scope='col') Дата
-                th(scope='col') ID пользователя
-                th(scope='col') ID товара
-                th(scope='col') Стоимость
-                th(scope='col') Кол-во
-                th(scope='col') Пользователь
-                th(scope='col') Телефон
-                th(scope='col') Адрес
-                th(scope='col') Общая сумма
-        tbody            
-            each val, index in orders  
-                tr    
-                    th(scope='col')= val['id']
-                    td= val['unix_timestapm']
-                    td= val['user_id'] 
-                    td= val['goods_id']
-                    td= val['goods_cost']
-                    td= val['goods_amount']
-                    td= val['user']
-                    td
-                        a(href='tel:'+val['phone'])= val['phone']
-                    td= val['adress'] 
-                    td= val['total']
+        table(class='table admin-table table-responsive table-striped table-bordered')
+            thead 
+                tr
+                    th(scope='col') id
+                    th(scope='col') Дата
+                    th(scope='col') ID пользователя
+                    th(scope='col') ID товара
+                    th(scope='col') Стоимость
+                    th(scope='col') Кол-во
+                    th(scope='col') Пользователь
+                    th(scope='col') Телефон
+                    th(scope='col') Адрес
+                    th(scope='col') Общая сумма
+            tbody            
+                each val, index in orders  
+                    tr    
+                        th(scope='col')= val['id']
+                        td= val['unix_timestapm']
+                        td= val['user_id'] 
+                        td= val['goods_id']
+                        td= val['goods_cost']
+                        td= val['goods_amount']
+                        td= val['user']
+                        td
+                            a(href='tel:'+val['phone'])= val['phone']
+                        td= val['adress'] 
+                        td= val['total']
 
 
-    // adding script to sorting table of orders, and convert html table to excel
-    script(src="js/table2excel.js")
-    script(src="js/tablesort.min.js")
-    script(src="js/orderTable.js")
-    include footer
+        // adding script to sorting table of orders, and convert html table to excel
+        script(src="js/table2excel.js")
+        script(src="js/tablesort.min.js")
+        script(src="js/orderTable.js")
+include footer
