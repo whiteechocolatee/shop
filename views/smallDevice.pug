@@ -1,0 +1,8 @@
+div(class='shop-at-phones')
+    each valGoods,index in category ? category : ['There is no value']
+        h2(class='category-name')
+            a( class='category-link' href='cat?id='+valGoods['id'])= valGoods['category']
+        div(class="cards-container")
+            each val,index in goods
+                if valGoods['id'] == val['category']
+                    include cards

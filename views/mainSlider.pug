@@ -1,0 +1,5 @@
+div(class='my-slider')
+    each val,index in goods
+        a(href='goods?id='+val['id'])
+            div(class="card")
+                img(src='./images/'+val['image'] class="card-img-top" alt="...")
