@@ -190,9 +190,47 @@ body {
   }
 }
 
+@media (min-width: 0px) {
+  .cards-container {
+    grid-template-columns: repeat(1, 1fr);
+    width: 100%;
+  }
+
+  .main-card {
+    height: 260px;
+  }
+}
+
+@media (min-width: 350px) {
+  .cards-container {
+    grid-template-columns: repeat(1, 1fr);
+    width: 80%;
+  }
+
+  .main-card {
+    min-height: 280px;
+  }
+}
+
 @media (min-width: 650px) {
   .cards-container {
     grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+  }
+
+  .main-card {
+    height: 350px;
+  }
+}
+
+@media (min-width: 750px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+  }
+
+  .main-card {
+    height: 400px;
   }
 }
 
@@ -200,9 +238,7 @@ body {
   .cards-container {
     grid-template-columns: repeat(3, 1fr);
   }
-}
 
-@media (min-width: 600px) {
   .main-card {
     height: 350px;
   }
@@ -359,11 +395,11 @@ hr {
   margin-right: 70px;
 }
 
-.container-footer h4 {
+.footer-brand h4 {
   font-family: "CormorantGaramond", serif;
 }
 
-.container-footer p {
+.footer-brand p {
   font-size: 12px;
   color: #474747;
 }
