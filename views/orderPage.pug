@@ -6,7 +6,7 @@ div(class='wrapper')
     div(class='container-fluid main-content')
         div(class='container')
             div(class='row')
-                h1 Форма для заказа
+                h1 Корзина
                 div(class='form-space')
                     div(id='cart-nav')
                     form(class='row g-3 needs-validation' novalidate)
@@ -30,7 +30,7 @@ div(class='wrapper')
                             div(class='form-check')
                                 input(class="form-check-input terms" type="checkbox" id="invalidCheck" required)
                                 label(class="form-check-label" for="invalidCheck") Я прочитал и согласен с правилами 
-                                    a(href='/agreement' class='terms-link' target="_blank") Пользовательского соглашения
+                                    a(href='/agreement' class='terms-link') Пользовательского соглашения
                                 div(class="invalid-feedback") Ознакомьтесь и подвердите
                         div(class="col-12")
                             button(class="btn btn-primary" type="submit") Submit form
@@ -38,5 +38,5 @@ div(class='wrapper')
     script(src="//cdn.jsdelivr.net/npm/sweetalert2@11")
     script(src="https://unpkg.com/imask")
     script(src="js/order.js")
-    include footer  
+include footer  
     
