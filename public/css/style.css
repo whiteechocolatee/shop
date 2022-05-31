@@ -34,8 +34,9 @@ a:hover {
 }
 
 body {
-  height: 100%;
+  height: 85%;
   font-family: "Roboto", sans-serif;
+  font-weight: lighter;
   background-color: #f8f8f8;
 }
 
@@ -127,7 +128,7 @@ body {
   padding: 1rem;
   transition: transform var(--d) var(--e);
   z-index: 1;
-  height: 80%;
+  height: 70%;
   overflow: scroll;
 }
 
@@ -286,10 +287,63 @@ body {
   }
 }
 
+.card-body-goods {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile-description {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin: 50px;
+}
+
+.add-to-cart {
+  width: 300px;
+  font-size: 14px;
+  margin-top: 80px;
+}
+
+.cart-btn {
+  font-size: 25px;
+  margin-left: 10px;
+}
+
+.profile-img {
+  width: 50%;
+}
+
+.profile-description p {
+  color: black;
+  font-size: 14px;
+}
+
+.goods-cost span {
+  font-size: 20px;
+}
+
+@media (max-width: 947px) {
+  .profile-img {
+    width: 100%;
+  }
+
+  .profile-description {
+    width: 100%;
+    align-items: center;
+    margin: 10px;
+  }
+
+  .add-to-cart {
+    width: 250px;
+    margin-top: 20px;
+  }
+}
+
 /* =========== main page =========== */
 
 .wrapper {
-  min-height: 100%;
+  min-height: 95%;
   display: flex;
   flex-direction: column;
 }
@@ -329,7 +383,6 @@ body {
 .main-title {
   font-family: "Roboto", sans-serif;
   font-weight: lighter;
-  font-size: 2.5vw;
 }
 
 .title-description {
@@ -421,16 +474,6 @@ hr {
   border-radius: 10px;
 }
 
-.container h4 {
-  font-family: "CormorantGaramond", serif;
-  margin: 0;
-}
-
-.container p {
-  color: grey;
-  font-size: 12px;
-}
-
 @media (max-width: 947px) {
   .choice-item-content {
     color: white;
@@ -468,7 +511,7 @@ hr {
     display: block;
   }
 
-  .my-slider {
+  .carousel {
     display: none;
   }
 }
@@ -477,32 +520,15 @@ hr {
   text-align: center;
 }
 
-.tns-outer button {
-  width: 0;
-  height: 0;
-  opacity: 0;
-}
-
-.my-slider {
+.carousel {
+  width: 80%;
   margin: 0 auto;
-}
-
-.my-slider .card {
-  margin: 0 auto;
-}
-
-.card {
-  margin: 0 20px;
-  width: 550px;
   height: 550px;
 }
 
-@media (max-width: 1200px) {
-  .card {
-    margin: 0 20px;
-    width: 400px;
-    height: 400px;
-  }
+.carousel__slide img {
+  width: 100%;
+  height: auto;
 }
 
 /* =========== header navigation =========== */
