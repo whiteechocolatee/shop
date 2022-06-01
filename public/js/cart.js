@@ -41,22 +41,67 @@ function ajaxGetGoodsInfo() {
 
 // rendering cart
 function showCart(data) {
+  console.log(data);
   let out = `<table class="table table-striped table-cart"><tbody>`;
   let totalItemCart = 0;
   let totalCart = 0;
 
   for (let key in cart) {
-    out += `<tr><td colspan="4"><a href='goods?id=${key}'>${data[key]["name"]}</a></td></tr>`;
-    out += `<tr><td><i class="bi bi-dash-circle cart-remove" data-goods_id='${key}'></i></td>`;
-    out += `<td>${cart[key]}</td>`;
-    out += `<td><i class="bi bi-plus-circle cart-add" data-goods_id='${key}'></i></td>`;
-    out += `<td>${data[key]["cost"] * cart[key]}</td></tr>`;
-    out += `</tr>`;
-    totalCart += cart[key] * data[key]["cost"];
-    totalItemCart += cart[key];
+    out += `
+    <div class="cart-card">
+      <div class="cart-img">
+        <img class="responsive-img rounded" src="./images/${data[key]["image"]}"/>
+      </div>
+      <div class="cart-info">
+        <h4>
+          <a href='goods?id=${key}'>
+            ${data[key]["name"]}
+          </a>
+        </h4>
+        <div class="cart-price">  
+          <p>Размер</p>
+          <p>Цвет</p>
+        </div>
+        <div class="cart-total">  
+          <p class="cart-item-quantity">
+            <span>
+              <i class="bi bi-dash-circle cart-remove" data-goods_id='${key}'>
+              </i>
+            </span>
+            <span>
+              ${cart[key]}
+            </span>
+            <span>
+              <i class="bi bi-plus-circle cart-add" data-goods_id='${key}'>
+              </i>
+            </span>
+          </p>
+          <p class="cart-item-price">
+            <b>
+              ${data[key]["cost"] * cart[key]}
+            </b>
+          </p>
+        </div>
+      </div>
+    </div>
+    `;
+    // out += `<tr>
+    //             <td colspan="4">
+    //                 <a href='goods?id=${key}'>
+    //                     ${data[key]["name"]}
+    //                 </a>
+    //             </td>
+    //         </tr>`;
+    // out += `<tr><td><i class="bi bi-dash-circle cart-remove" data-goods_id='${key}'></i></td>`; // меньше
+    // out += `<td>${cart[key]}</td>`; // колво товаров
+    // out += `<td><i class="bi bi-plus-circle cart-add" data-goods_id='${key}'></i></td>`; // больше
+    // out += `<td>${data[key]["cost"] * cart[key]}</td></tr>`; // тотал
+    // out += `</tr>`;
+    // totalCart += cart[key] * data[key]["cost"]; // тотал корзины
+    // totalItemCart += cart[key]; // общее колво вещей в корзине
   }
-  out += `<tr><td colspan="3">Total: ${totalItemCart}</td><td>${totalCart}</td></tr>`;
-  out += `</tbody></table>`;
+  // out += `<tr><td colspan="3">Total: ${totalItemCart}</td><td>${totalCart}</td></tr>`;
+  // out += `</tbody></table>`;
 
   if (totalItemCart > 0) {
     document.querySelector(".total-items").style.opacity = "100%";
