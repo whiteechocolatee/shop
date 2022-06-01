@@ -137,10 +137,19 @@ app.get("/goods", function (req, res) {
     fields
   ) {
     if (err) throw err;
-    res.render("goods", { goods: JSON.parse(JSON.stringify(result)) });
+    result = JSON.parse(JSON.stringify(result));
+    console.log(result[0]["id"]);
+    con.query(
+      "SELECT * FROM images WHERE goods_id=" + result[0]["id"],
+      function (err, imgResult) {
+        if (err) throw err;
+        console.log(imgResult);
+        imgResult = JSON.parse(JSON.stringify(imgResult));
+        res.render("goods", { goods: result, images: imgResult });
+      }
+    );
   });
 });
-//
 
 // render order page
 app.get("/order", function (req, res) {
