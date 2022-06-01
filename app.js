@@ -224,7 +224,7 @@ app.get("/add-new-item", function (req, res) {
   res.render("addNewItem");
 });
 
-//
+//edit card page
 app.get("/edit", function (req, res) {
   con.query("SELECT * FROM goods WHERE id=" + req.query.id, function (
     err,
@@ -232,7 +232,20 @@ app.get("/edit", function (req, res) {
     fields
   ) {
     if (err) throw err;
-    res.render("editPage", { goods: JSON.parse(JSON.stringify(result)) });
+    result = JSON.parse(JSON.stringify(result));
+    con.query("SELECT * FROM images WHERE goods_id=" + req.query.id, function (
+      err,
+      imagesResult,
+      fields
+    ) {
+      imagesResult = JSON.parse(JSON.stringify(imagesResult));
+      console.log(imagesResult);
+
+      res.render("editPage", {
+        goods: result,
+        images: imagesResult,
+      });
+    });
   });
 });
 
@@ -276,6 +289,12 @@ app.post("/update-item", function (req, res) {
   }
 
   con.query(sqlRequest, function (err) {
+    if (err) throw err;
+  });
+
+  let insertIntoSqlImages = `INSERT INTO images (goods_id,path) VALUES ?`;
+
+  con.query(insertIntoSqlImages, [data.imgArr], function (err) {
     if (err) throw err;
   });
 

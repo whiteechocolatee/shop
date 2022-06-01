@@ -599,7 +599,7 @@ hr {
 .carousel {
   width: 80%;
   margin: 0 auto;
-  height: 550px;
+  height: 600px;
 }
 
 .carousel__slide img {
@@ -790,8 +790,7 @@ span b {
 .card-holder {
   margin: 50px auto 0 auto;
   width: 700px;
-  height: 400px;
-  overflow: scroll;
+  height: 430px;
 }
 
 .card-content {
@@ -802,7 +801,7 @@ span b {
 .card-img {
   border: 1px solid black;
   width: 300px;
-  height: 375px;
+  height: 430px;
   overflow: hidden;
 }
 
@@ -814,8 +813,6 @@ span b {
   justify-content: space-between;
   padding: 10px 5px;
 }
-
-
 
 @media (max-width: 1199px) {
   .admin-card {
@@ -832,6 +829,12 @@ span b {
   .card-body {
     width: 300px;
   }
+}
+
+.additional_images {
+  width: 100%;
+  height: 60px;
+  display: flex;
 }
 
 @media (max-width: 375px) {

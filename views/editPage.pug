@@ -10,12 +10,19 @@ div(class='wrapper')
             form(action="/upload-edited-image" class='update-form-img needs-validation' method='post' enctype='multipart/form-data') 
                 label Выберите фото
                 br
-                input(type="file" class='update-img' title='Text' name='editedImage')
+                input(type="file" class='update-img' name='editedImage')
+                br
+                label(for='additional-img') Доп фото
+                br
+                input(type="file" class='additional-img' name='editedImage')
                 each val,index in goods
                     div(class='card-holder')
                         div(class='card-content')
                             div(class='card-img')
                                 img(src='./images/'+val['image'] class='admin-img rounded' id="img1")
+                                div(class='additional_images')
+                                    each value,index in images
+                                        img(src='./images/'+value['path'] id='img2' class='admin-img admin-small-img rounded')
                             div(class='card-description')
                                 div
                                     label(for='item-edit-name') Обновление наименования товара&nbsp;
