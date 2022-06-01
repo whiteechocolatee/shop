@@ -138,12 +138,10 @@ app.get("/goods", function (req, res) {
   ) {
     if (err) throw err;
     result = JSON.parse(JSON.stringify(result));
-    console.log(result[0]["id"]);
     con.query(
       "SELECT * FROM images WHERE goods_id=" + result[0]["id"],
       function (err, imgResult) {
         if (err) throw err;
-        console.log(imgResult);
         imgResult = JSON.parse(JSON.stringify(imgResult));
         res.render("goods", { goods: result, images: imgResult });
       }
@@ -239,8 +237,6 @@ app.get("/edit", function (req, res) {
       fields
     ) {
       imagesResult = JSON.parse(JSON.stringify(imagesResult));
-      console.log(imagesResult);
-
       res.render("editPage", {
         goods: result,
         images: imagesResult,
@@ -356,7 +352,7 @@ app.post("/get-category-list", function (req, res) {
 app.post("/get-goods-info", function (req, res) {
   if (req.body.key.length != 0) {
     con.query(
-      "SELECT id, name, cost FROM goods WHERE id IN (" +
+      "SELECT id, name, cost, image FROM goods WHERE id IN (" +
         req.body.key.join(",") +
         ")",
       function (err, result, fileds) {
