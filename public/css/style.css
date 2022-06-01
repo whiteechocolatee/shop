@@ -416,6 +416,43 @@ a[data-fancybox] img {
   }
 }
 
+.cart-card {
+  width: 450px;
+  overflow: hidden;
+  display: flex;
+  margin-top: 10px;
+}
+
+.cart-img {
+  width: 45%;
+  height: auto;
+}
+
+.cart-info {
+  width: 200px;
+  margin: 10px 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cart-total,
+.cart-price {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-item-quantity span,
+.cart-item-price b {
+  margin-left: 5px;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}
+
 /* =========== main page =========== */
 
 .wrapper {
