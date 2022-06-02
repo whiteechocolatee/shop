@@ -123,9 +123,23 @@ app.get("/cat", function (req, res) {
       resolve(result);
     });
   });
-  //
-  Promise.all([category, goods]).then((value) => {
-    res.render("category", { category: value[0], goods: value[1] });
+
+  let types = new Promise((resolve, reject) => {
+    con.query(
+      "SELECT DISTINCT type FROM goods WHERE category=" + categoryId,
+      function (err, result) {
+        if (err) reject(err);
+        resolve(result);
+      }
+    );
+  });
+
+  Promise.all([category, goods, types]).then((value) => {
+    res.render("category", {
+      category: value[0],
+      goods: value[1],
+      types: value[2],
+    });
   });
 });
 
@@ -269,7 +283,8 @@ app.post("/update-item", function (req, res) {
     SET name = '${data.name}',
         description = '${data.description}',
         cost = '${data.cost}',
-        category = '${data.category}'
+        category = '${data.category}',
+        type = '${data.type}'
     WHERE id = ${data.id}
     `;
   } else {
@@ -279,7 +294,8 @@ app.post("/update-item", function (req, res) {
         description = '${data.description}',
         cost = '${data.cost}',
         image = '${data.image}',
-        category = '${data.category}'
+        category = '${data.category}',
+        type = '${data.type}'
     WHERE id = ${data.id}
     `;
   }
