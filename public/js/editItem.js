@@ -2,6 +2,7 @@ let updatingForm = document.querySelector(".update-form-img");
 let inputFile = document.querySelector(".update-img");
 let addMoreImg = document.querySelector(".additional-img");
 let itemName = document.querySelector(".update-name");
+let itemType = document.querySelector(".update-type");
 let itemDesc = document.querySelector(".update-description");
 let itemCost = document.querySelector(".update-cost");
 let itemCat = document.querySelector(".update-category");
@@ -75,6 +76,7 @@ updatingForm.addEventListener("submit", function () {
       cost: itemCost.value.trim(),
       image: imageName,
       category: itemCat.value.trim(),
+      type: itemType.value.trim(),
       id: Number(idOfItem.innerHTML),
       imgArr: arrOfImg,
     }),
