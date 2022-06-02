@@ -288,11 +288,12 @@ app.post("/update-item", function (req, res) {
     if (err) throw err;
   });
 
-  let insertIntoSqlImages = `INSERT INTO images (goods_id,path) VALUES ?`;
-
-  con.query(insertIntoSqlImages, [data.imgArr], function (err) {
-    if (err) throw err;
-  });
+  if (data.imgArr.length > 0) {
+    let insertIntoSqlImages = `INSERT INTO images (goods_id,path) VALUES ?`;
+    con.query(insertIntoSqlImages, [data.imgArr], function (err) {
+      if (err) throw err;
+    });
+  }
 
   res.send("1");
 });
