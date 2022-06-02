@@ -28,8 +28,11 @@ div(class='wrapper')
                                     label(for='item-edit-name') Обновление наименования товара&nbsp;
                                     input(name='item-edit-name' class='update-name' type="text" value=val['name'] required)
                                 div
+                                    label(for='item-edit-type') Обновление типа товара(футболка,худи и тд.)&nbsp;
+                                    input(name='item-edit-name' class='update-type' type="text" value=val['type'] required)
+                                div
                                     label(for='item-edit-description') Обновите описание
-                                    textarea(name="item-edit-description" class='update-description' cols="40" rows="7" required)= val['description']
+                                    textarea(name="item-edit-description" class='update-description' cols="40" rows="5" required)= val['description']
                                 div
                                     label(for='item-edit-cost') Обновите цену&nbsp;
                                     input(name='item-edit-cost' class='update-cost' value=val['cost'] type="number" required) 
