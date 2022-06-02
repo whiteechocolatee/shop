@@ -8,6 +8,12 @@
   font-family: "Roboto", sans-serif;
 }
 
+.category-title {
+  color: #BCBCBC;
+  font-weight: lighter;
+  font-size: 25px;
+}
+
 a {
   text-decoration: none;
   color: black;
@@ -456,7 +462,7 @@ a[data-fancybox] img {
 .cart-check {
   height: 1%;
   padding: 10px;
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
   width: 40%;
 }
 
@@ -515,6 +521,10 @@ a[data-fancybox] img {
   position: absolute;
   width: 150%;
   text-align: end;
+}
+
+.choice-item-content h2 {
+  font-size: 4.5vh;
 }
 
 .main-title {
