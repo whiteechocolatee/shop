@@ -9,7 +9,7 @@
 }
 
 .category-title {
-  color: #BCBCBC;
+  color: #bcbcbc;
   font-weight: lighter;
   font-size: 25px;
 }
@@ -422,67 +422,6 @@ a[data-fancybox] img {
   }
 }
 
-.cart-card {
-  width: 450px;
-  overflow: hidden;
-  display: flex;
-  margin-top: 10px;
-}
-
-.cart-img {
-  width: 45%;
-  height: auto;
-}
-
-.cart-info {
-  width: 200px;
-  margin: 10px 0 0 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.cart-total,
-.cart-price {
-  display: flex;
-  justify-content: space-between;
-}
-
-#cart-nav {
-  display: flex;
-  justify-content: space-between;
-}
-
-.cart-cards {
-  display: flex;
-  width: 55%;
-  flex-direction: column;
-}
-
-.cart-check {
-  height: 1%;
-  padding: 10px;
-  background-color: #f2f2f2;
-  width: 40%;
-}
-
-.check-body,
-.check-footer {
-  display: flex;
-  justify-content: space-between;
-}
-
-.cart-item-quantity span,
-.cart-item-price b {
-  margin-left: 5px;
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Chrome/Safari/Opera */
-  -khtml-user-select: none; /* Konqueror */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none;
-}
-
 /* =========== main page =========== */
 
 .wrapper {
@@ -782,6 +721,44 @@ header {
   }
 }
 
+/* =========== filter nav =========== */
+
+.category-gallery {
+  display: flex;
+  flex-direction: column;
+}
+
+.filters-side {
+  display: inline-block;
+}
+
+.filtration-nav ul {
+  list-style-type: none;
+}
+
+.filtration-li {
+  color: #c7c7c7;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  transition: background-size 0.5s;
+  cursor: pointer;
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.selected {
+  color: black;
+  background-size: 100% 2px;
+  background-image: linear-gradient(currentColor, currentColor);
+  margin: 0 10px;
+}
+
+.hide {
+  display: none;
+}
+
 /* =========== order form =========== */
 
 .form-space {
@@ -791,6 +768,67 @@ header {
 
 .terms-link {
   text-decoration: underline;
+}
+
+.cart-card {
+  width: 450px;
+  overflow: hidden;
+  display: flex;
+  margin-top: 10px;
+}
+
+.cart-img {
+  width: 45%;
+  height: auto;
+}
+
+.cart-info {
+  width: 200px;
+  margin: 10px 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cart-total,
+.cart-price {
+  display: flex;
+  justify-content: space-between;
+}
+
+#cart-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-cards {
+  display: flex;
+  width: 55%;
+  flex-direction: column;
+}
+
+.cart-check {
+  height: 1%;
+  padding: 10px;
+  background-color: #f2f2f2;
+  width: 40%;
+}
+
+.check-body,
+.check-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-item-quantity span,
+.cart-item-price b {
+  margin-left: 5px;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
 }
 
 /* =========== admin table =========== */

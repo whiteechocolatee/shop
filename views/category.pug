@@ -5,10 +5,15 @@ include navigationHeader
 div(class='wrapper')
     div(class='container-lg main-content')
         h1(class='category-title')= category[0]['category']
-        div(class='col-lg-12')
+        div(class='category-gallery')
+            div(class='filters-side')
+                nav(class='filtration-nav')
+                    ul
+                        li(class='filtration-li selected' data-filter='all') Всё
+                        each value in types 
+                            li(class='filtration-li' data-filter= value['type'])= value['type']
             div(class='cards-container')
-                each val,index in goods ? goods : ['There is no value']
-                    include cards
-        div= category[0]['description']
-
+                    each val,index in goods
+                        include cards
+    script(src='js/filterNavigation.js') 
 include footer

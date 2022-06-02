@@ -1,4 +1,4 @@
-div(class='main-card')
+div(class='main-card '+val['type'])
     img(class='bg-img' src='./images/'+val['image'] alt='фото товара')
     div(class='main-card-content')
         a(href='goods?id='+val['id'] class='card-link')
