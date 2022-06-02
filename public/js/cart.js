@@ -41,7 +41,6 @@ function ajaxGetGoodsInfo() {
 
 // rendering cart
 function showCart(data) {
-  console.log(data);
   let out = ``;
   let check = `
       <div class="check-card">
