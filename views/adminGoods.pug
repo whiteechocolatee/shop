@@ -19,11 +19,13 @@ div(class='wrapper')
                                         h5(class="card-title admin-title")= val['name']
                                         a(href='edit?id='+val['id']) edit 
                                     p(class="card-text admin-description")= val['description']
-                                    span(class="card-text") Цена - &nbsp;
+                                    span(class="card-text") Цена-
                                         b #{val['cost']} 
-                                    span(class="card-text") ID - &nbsp;
+                                    span(class="card-text") Тип-
+                                        b #{val['type']}     
+                                    span(class="card-text") ID-
                                         b #{val['id']}  
-                                    span(class="card-text") Категория - &nbsp;
+                                    span(class="card-text") Категория-
                                         if val['category'] == 2
                                             b Женское  
                                         else if val['category'] == 1
