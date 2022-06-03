@@ -763,7 +763,7 @@ header {
 
 .form-space {
   width: 800px;
-  margin: 0 auto;
+  margin: 10px auto;
 }
 
 .terms-link {
@@ -771,10 +771,12 @@ header {
 }
 
 .cart-card {
-  width: 450px;
+  width: 80%;
   overflow: hidden;
   display: flex;
   margin-top: 10px;
+  background-color: #fff;
+  border-radius: 20px;
 }
 
 .cart-img {
@@ -785,6 +787,7 @@ header {
 .cart-info {
   width: 200px;
   margin: 10px 0 0 10px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -802,22 +805,51 @@ header {
 }
 
 .cart-cards {
+  margin: 0 auto;
   display: flex;
-  width: 55%;
-  flex-direction: column;
+  width: 50%;
+  flex-wrap: wrap;
 }
 
 .cart-check {
-  height: 1%;
+  border-radius: 5px;
+  align-self: flex-start;
   padding: 10px;
   background-color: #f2f2f2;
   width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.check-body,
+.check-description,
 .check-footer {
   display: flex;
   justify-content: space-between;
+}
+
+.check-description {
+  margin: 40px 0;
+}
+
+@media (max-width: 992px) {
+  #cart-nav {
+    flex-wrap: wrap;
+  }
+
+  .cart-cards,
+  .cart-card {
+    width: 100%;
+  }
+
+  .cart-info {
+    padding-left: 10px;
+  }
+
+  .cart-check {
+    margin: 20px 0;
+    width: 100%;
+  }
 }
 
 .cart-item-quantity span,

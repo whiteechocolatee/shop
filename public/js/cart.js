@@ -49,7 +49,9 @@ function showCart(data) {
             Чек
           </h3>
           <hr>
-        </div>`;
+        </div>
+        <div class="check-body">
+        `;
 
   let totalItemCart = 0;
   let totalCart = 0;
@@ -97,14 +99,14 @@ function showCart(data) {
       `;
 
     check += `
-        <div class="check-body">
-          <p>
-            ${data[key]["name"]}
-          </p>
-          <p>
-            ${cart[key]}
-          </p>
-        </div>
+          <div class="check-description">
+            <span>
+              ${data[key]["name"]}
+            </span>
+            <span>
+              ${cart[key]}
+            </span>
+          </div>
             `;
 
     totalCart += cart[key] * data[key]["cost"]; // тотал корзины
@@ -112,6 +114,7 @@ function showCart(data) {
   }
 
   check += `
+        </div>
         <hr>
         <div class="check-footer">
           <h3>Итого</h3>

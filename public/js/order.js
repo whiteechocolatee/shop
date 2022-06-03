@@ -54,7 +54,7 @@ form.addEventListener(
             setTimeout(() => {
               location.reload();
               window.location.replace("/");
-            }, 5000);
+            }, 3000);
           } else if (body == "0") {
             Swal.fire({
               icon: "error",
@@ -62,6 +62,10 @@ form.addEventListener(
               text: "Ваша корзина пуста!",
               footer: '<a href="/">Вернуться на главную</a>',
             });
+            setTimeout(() => {
+              location.reload();
+              window.location.replace("/");
+            }, 3000);
           }
         });
     }
