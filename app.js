@@ -367,7 +367,7 @@ app.post("/get-category-list", function (req, res) {
 
 // get items in cart
 app.post("/get-goods-info", function (req, res) {
-  if (req.body.key.length != 0) {
+  if (req.body.key != "undefined" && req.body.key.length != 0) {
     con.query(
       "SELECT id, name, cost, image FROM goods WHERE id IN (" +
         req.body.key.join(",") +
