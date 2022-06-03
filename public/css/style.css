@@ -405,7 +405,7 @@ a[data-fancybox] img {
   display: none;
 }
 
-@media (max-width: 947px) {
+@media (max-width: 992px) {
   .profile-img {
     width: 100%;
   }
@@ -491,10 +491,16 @@ hr {
   object-position: 0 0;
 }
 
-.brand-name {
+.big-logo {
   font-size: 10vw;
   color: #f2f2f2;
   font-family: "CormorantGaramond", serif;
+}
+
+.absolution {
+  top: 10;
+  position: absolute;
+  z-index: -999;
 }
 
 .brand-image {
@@ -560,7 +566,7 @@ hr {
   border-radius: 10px;
 }
 
-@media (max-width: 947px) {
+@media (max-width: 992px) {
   .choice-item-content {
     color: white;
     width: 300%;
