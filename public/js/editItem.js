@@ -1,3 +1,8 @@
+// getting imgs for editing additional images
+let additionalBlock = document.querySelector(".additional_images");
+let deleteImg;
+
+// getting all forms for pushing to db
 let updatingForm = document.querySelector(".update-form-img");
 let inputFile = document.querySelector(".update-img");
 let addMoreImg = document.querySelector(".additional-img");
@@ -7,7 +12,6 @@ let itemDesc = document.querySelector(".update-description");
 let itemCost = document.querySelector(".update-cost");
 let itemCat = document.querySelector(".update-category");
 let idOfItem = document.querySelector(".id");
-
 let imageName;
 let arrOfImg = [];
 
@@ -36,8 +40,6 @@ addMoreImg.addEventListener("change", function (event) {
   fileReader.readAsDataURL(target.files[0]);
 
   arrOfImg.push(Array(Number(idOfItem.innerHTML), target.files[0].name));
-
-  console.log(arrOfImg);
 });
 
 // showing preview of card image
@@ -67,6 +69,12 @@ inputFile.addEventListener("change", function (event) {
   imageName = target.files[0].name;
 });
 
+additionalBlock.addEventListener("click", (event) => {
+  deleteImg = Number(event.target.alt);
+
+  event.target.remove()
+});
+
 updatingForm.addEventListener("submit", function () {
   fetch("/update-item", {
     method: "POST",
@@ -79,6 +87,7 @@ updatingForm.addEventListener("submit", function () {
       type: itemType.value.trim(),
       id: Number(idOfItem.innerHTML),
       imgArr: arrOfImg,
+      delAddImg: deleteImg,
     }),
     headers: {
       Accept: "application/json",

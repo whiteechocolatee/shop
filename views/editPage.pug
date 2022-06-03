@@ -22,7 +22,7 @@ div(class='wrapper')
                                 img(src='./images/'+val['image'] class='admin-img rounded' id="img1")
                                 div(class='additional_images')
                                     each value,index in images
-                                        img(src='./images/'+value['path'] id='img2' class='admin-img admin-small-img rounded')
+                                        img(src='./images/'+value['path'] id='img2' alt=value['id'] class='admin-img admin-small-img rounded')
                             div(class='card-description')
                                 div
                                     label(for='item-edit-name') Обновление наименования товара&nbsp;
@@ -32,7 +32,7 @@ div(class='wrapper')
                                     input(name='item-edit-name' class='update-type' type="text" value=val['type'] required)
                                 div
                                     label(for='item-edit-description') Обновите описание
-                                    textarea(name="item-edit-description" class='update-description' cols="40" rows="5" required)= val['description']
+                                    textarea(name="item-edit-description" class='update-description' cols="60" rows="5" required)= val['description']
                                 div
                                     label(for='item-edit-cost') Обновите цену&nbsp;
                                     input(name='item-edit-cost' class='update-cost' value=val['cost'] type="number" required) 

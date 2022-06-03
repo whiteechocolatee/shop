@@ -275,6 +275,7 @@ app.post("/upload-edited-image", upload.single("editedImage"), function (
 // update data goods
 app.post("/update-item", function (req, res) {
   let data = req.body;
+  console.log(data.delAddImg);
   let sqlRequest;
 
   if (data.image === undefined) {
@@ -307,6 +308,10 @@ app.post("/update-item", function (req, res) {
   if (data.imgArr.length > 0) {
     let insertIntoSqlImages = `INSERT INTO images (goods_id,path) VALUES ?`;
     con.query(insertIntoSqlImages, [data.imgArr], function (err) {
+      if (err) throw err;
+    });
+  } else if (data.delAddImg != undefined) {
+    con.query(`DELETE FROM images WHERE id=${data.delAddImg}`, function (err) {
       if (err) throw err;
     });
   }
