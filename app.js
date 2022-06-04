@@ -145,34 +145,59 @@ app.get("/cat", function (req, res) {
 
 //sending items to goods page
 app.get("/goods", function (req, res) {
-  con.query("SELECT * FROM goods WHERE id=" + req.query.id, function (
-    err,
-    result,
-    fields
-  ) {
-    if (err) throw err;
-    result = JSON.parse(JSON.stringify(result));
-    con.query(
-      "SELECT * FROM goods_images WHERE goods_id=" + result[0]["id"],
-      function (err, imgResult) {
-        if (err) throw err;
-        imgResult = JSON.parse(JSON.stringify(imgResult));
+  let goodsId = req.query.id;
 
-        con.query(
-          "SELECT * FROM goods_colors WHERE goods_id=" + result[0]["id"],
-          function (err, colorsResult, fields) {
-            colorsResult = JSON.parse(JSON.stringify(colorsResult));
-            console.log(colorsResult);
-            res.render("goods", {
-              goods: result,
-              images: imgResult,
-              colors: colorsResult,
-            });
-          }
-        );
-      }
-    );
+  console.log(goodsId);
+
+  let goodsData = new Promise((resolve, reject) => {
+    con.query("SELECT * FROM goods WHERE id=" + goodsId, function (
+      err,
+      result,
+      fields
+    ) {
+      if (err) reject(err);
+      resolve(result);
+    });
   });
+
+  let goodsImages = new Promise((resolve, reject) => {
+    con.query("SELECT * FROM goods_images WHERE goods_id=" + goodsId, function (
+      err,
+      imgResult,
+      fields
+    ) {
+      if (err) reject(err);
+      resolve(imgResult);
+    });
+  });
+
+  let goodsColors = new Promise((resolve, reject) => {
+    con.query("SELECT * FROM goods_colors WHERE goods_id=" + goodsId, function (
+      err,
+      colorsResult,
+      fields
+    ) {
+      if (err) reject(err);
+      resolve(colorsResult);
+    });
+  });
+
+  Promise.all([goodsData, goodsImages, goodsColors]).then((value) => {
+    console.log(value);
+    res.render("goods", {
+      goods: value[0],
+      images: value[1],
+      colors: value[2],
+    });
+  });
+  
+  // res.end();
+
+  // res.render("goods", {
+  // goods: result,
+  // images: imgResult,
+  // colors: colorsResult,
+  // });
 });
 
 // render order page
