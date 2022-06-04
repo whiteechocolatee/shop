@@ -72,7 +72,7 @@ app.listen(port, hostname, () => {
 
 // getting main page
 app.get("/", function (req, res) {
-  // taking all goods for rendering main page
+  // taking 3 goods from every category and rendering main page
   let goodsName = new Promise(function (resolve, reject) {
     con.query(
       "SELECT id,name,description,cost,image,category FROM (SELECT id,name,description,cost,image,category, IF(IF(@curr_category != category,@curr_category := category,'')!= '',@k := 0, @k := @k+1) as ind FROM goods, (SELECT @curr_category := '') v ) goods WHERE ind < 4",
@@ -153,11 +153,23 @@ app.get("/goods", function (req, res) {
     if (err) throw err;
     result = JSON.parse(JSON.stringify(result));
     con.query(
-      "SELECT * FROM images WHERE goods_id=" + result[0]["id"],
+      "SELECT * FROM goods_images WHERE goods_id=" + result[0]["id"],
       function (err, imgResult) {
         if (err) throw err;
         imgResult = JSON.parse(JSON.stringify(imgResult));
-        res.render("goods", { goods: result, images: imgResult });
+
+        con.query(
+          "SELECT * FROM goods_colors WHERE goods_id=" + result[0]["id"],
+          function (err, colorsResult, fields) {
+            colorsResult = JSON.parse(JSON.stringify(colorsResult));
+            console.log(colorsResult);
+            res.render("goods", {
+              goods: result,
+              images: imgResult,
+              colors: colorsResult,
+            });
+          }
+        );
       }
     );
   });
@@ -245,17 +257,26 @@ app.get("/edit", function (req, res) {
   ) {
     if (err) throw err;
     result = JSON.parse(JSON.stringify(result));
-    con.query("SELECT * FROM images WHERE goods_id=" + req.query.id, function (
-      err,
-      imagesResult,
-      fields
-    ) {
-      imagesResult = JSON.parse(JSON.stringify(imagesResult));
-      res.render("editPage", {
-        goods: result,
-        images: imagesResult,
-      });
-    });
+
+    con.query(
+      "SELECT * FROM goods_images WHERE goods_id=" + req.query.id,
+      function (err, imagesResult, fields) {
+        if (err) throw err;
+        imagesResult = JSON.parse(JSON.stringify(imagesResult));
+
+        con.query(
+          "SELECT * FROM goods_colors WHERE goods_id=" + req.query.id,
+          function (err, colorsResult, fields) {
+            colorsResult = JSON.parse(JSON.stringify(colorsResult));
+            res.render("editPage", {
+              goods: result,
+              images: imagesResult,
+              colors: colorsResult,
+            });
+          }
+        );
+      }
+    );
   });
 });
 
@@ -275,7 +296,7 @@ app.post("/upload-edited-image", upload.single("editedImage"), function (
 // update data goods
 app.post("/update-item", function (req, res) {
   let data = req.body;
-  console.log(data.delAddImg);
+  console.log(data.imgArr);
   let sqlRequest;
 
   if (data.image === undefined) {
@@ -303,25 +324,32 @@ app.post("/update-item", function (req, res) {
 
   con.query(sqlRequest, function (err) {
     if (err) throw err;
-  });
 
-  if (data.imgArr.length > 0) {
-    let insertIntoSqlImages = `INSERT INTO images (goods_id,path) VALUES ?`;
-    con.query(insertIntoSqlImages, [data.imgArr], function (err) {
-      if (err) throw err;
-    });
-  }
-
-  if (data.delAddImg != undefined) {
-    data.delAddImg.forEach((elem) => {
-      console.log(elem);
-      con.query(`DELETE FROM images WHERE id=${elem}`, function (err) {
+    if (data.imgArr.length > 0) {
+      let insertIntoSqlImages = `INSERT INTO goods_images (goods_id,path) VALUES ?`;
+      con.query(insertIntoSqlImages, [data.imgArr], function (err) {
         if (err) throw err;
       });
-    });
-  }
+    }
 
-  res.send("1");
+    if (data.colors.length > 0) {
+      let insertIntoSqlImages = `INSERT INTO goods_colors (goods_id,color) VALUES ?`;
+      con.query(insertIntoSqlImages, [data.colors], function (err) {
+        if (err) throw err;
+      });
+    }
+
+    if (data.delAddImg != []) {
+      data.delAddImg.forEach((elem) => {
+        console.log(elem);
+        con.query(`DELETE FROM goods_images WHERE id=${elem}`, function (err) {
+          if (err) throw err;
+        });
+      });
+    }
+
+    res.send("1");
+  });
 });
 
 // saving new goods to data base

@@ -293,6 +293,37 @@ body {
   }
 }
 
+.goods-colors {
+  -webkit-appearance: none;
+  border: none;
+  background: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+/* -webkit */
+.goods-colors::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.goods-colors::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+/* firefox */
+.goods-colors::-moz-focus-inner {
+  border: none;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.goods-colors::-moz-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
 .card-body-goods {
   display: flex;
   flex-wrap: wrap;
@@ -497,10 +528,17 @@ hr {
   font-family: "CormorantGaramond", serif;
 }
 
+
 .absolution {
   top: 10;
   position: absolute;
   z-index: -999;
+}
+
+@media (max-width: 992px) {
+  .absolution {
+    display: none;
+  }
 }
 
 .brand-image {
@@ -888,6 +926,15 @@ header {
 }
 
 /* =========== admin goods =========== */
+
+.btns-control {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btns-control input {
+  margin-left: 10px;
+}
 
 .cards-gallery {
   display: flex;

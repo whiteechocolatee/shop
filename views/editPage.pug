@@ -8,13 +8,17 @@ div(class='wrapper')
                     a(href="/admin-goods" class='btn btn-primary') Назад <- 
                     a(href="/admin" class='btn btn-primary') На главную 
             form(action="/upload-edited-image" class='update-form-img needs-validation' method='post' enctype='multipart/form-data') 
-                label Выберите фото
-                br
-                input(type="file" class='update-img' name='editedImage')
-                br
-                label(for='additional-img') Доп фото
-                br
-                input(type="file" class='additional-img' name='editedImage')
+                h2 Управления редактивания
+                div(class='btns-control')
+                    div
+                        label(for='choose-color') Добавьте цвет
+                        input(type='color' class='choose-color')
+                    div 
+                        label Главное фото
+                        input(type="file" class='update-img' name='editedImage')
+                    div
+                        label(for='additional-img') Доп фото
+                        input(type="file" class='additional-img' name='editedImage')
                 each val,index in goods
                     div(class='card-holder')
                         div(class='card-content')
@@ -24,6 +28,11 @@ div(class='wrapper')
                                     each value,index in images
                                         img(src='./images/'+value['path'] id='img2' alt=value['id'] class='admin-img admin-small-img rounded')
                             div(class='card-description')
+                                div(class='item-colors')
+                                    label(for='item-edit-сolor') Обновление цветов&nbsp;
+                                    br
+                                    each values in colors 
+                                        input(type='color' value=values['color'])
                                 div
                                     label(for='item-edit-name') Обновление наименования товара&nbsp;
                                     input(name='item-edit-name' class='update-name' type="text" value=val['name'] required)
