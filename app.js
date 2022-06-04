@@ -147,8 +147,6 @@ app.get("/cat", function (req, res) {
 app.get("/goods", function (req, res) {
   let goodsId = req.query.id;
 
-  console.log(goodsId);
-
   let goodsData = new Promise((resolve, reject) => {
     con.query("SELECT * FROM goods WHERE id=" + goodsId, function (
       err,
@@ -183,21 +181,12 @@ app.get("/goods", function (req, res) {
   });
 
   Promise.all([goodsData, goodsImages, goodsColors]).then((value) => {
-    console.log(value);
     res.render("goods", {
       goods: value[0],
       images: value[1],
       colors: value[2],
     });
   });
-  
-  // res.end();
-
-  // res.render("goods", {
-  // goods: result,
-  // images: imgResult,
-  // colors: colorsResult,
-  // });
 });
 
 // render order page
@@ -275,33 +264,47 @@ app.get("/add-new-item", function (req, res) {
 
 //edit card page
 app.get("/edit", function (req, res) {
-  con.query("SELECT * FROM goods WHERE id=" + req.query.id, function (
-    err,
-    result,
-    fields
-  ) {
-    if (err) throw err;
-    result = JSON.parse(JSON.stringify(result));
+  let goodsId = req.query.id;
 
-    con.query(
-      "SELECT * FROM goods_images WHERE goods_id=" + req.query.id,
-      function (err, imagesResult, fields) {
-        if (err) throw err;
-        imagesResult = JSON.parse(JSON.stringify(imagesResult));
+  let goodsData = new Promise((resolve, reject) => {
+    con.query("SELECT * FROM goods WHERE id=" + goodsId, function (
+      err,
+      result,
+      fields
+    ) {
+      if (err) reject(err);
+      resolve(result);
+    });
+  });
 
-        con.query(
-          "SELECT * FROM goods_colors WHERE goods_id=" + req.query.id,
-          function (err, colorsResult, fields) {
-            colorsResult = JSON.parse(JSON.stringify(colorsResult));
-            res.render("editPage", {
-              goods: result,
-              images: imagesResult,
-              colors: colorsResult,
-            });
-          }
-        );
-      }
-    );
+  let goodsImages = new Promise((resolve, reject) => {
+    con.query("SELECT * FROM goods_images WHERE goods_id=" + goodsId, function (
+      err,
+      imgResult,
+      fields
+    ) {
+      if (err) reject(err);
+      resolve(imgResult);
+    });
+  });
+
+  let goodsColors = new Promise((resolve, reject) => {
+    con.query("SELECT * FROM goods_colors WHERE goods_id=" + goodsId, function (
+      err,
+      colorsResult,
+      fields
+    ) {
+      if (err) reject(err);
+      resolve(colorsResult);
+    });
+  });
+
+  Promise.all([goodsData, goodsImages, goodsColors]).then((value) => {
+    res.render("editPage", {
+      goods: value[0],
+      images: value[1],
+      colors: value[2],
+    });
   });
 });
 
@@ -321,7 +324,6 @@ app.post("/upload-edited-image", upload.single("editedImage"), function (
 // update data goods
 app.post("/update-item", function (req, res) {
   let data = req.body;
-  console.log(data.imgArr);
   let sqlRequest;
 
   if (data.image === undefined) {
