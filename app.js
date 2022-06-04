@@ -310,9 +310,14 @@ app.post("/update-item", function (req, res) {
     con.query(insertIntoSqlImages, [data.imgArr], function (err) {
       if (err) throw err;
     });
-  } else if (data.delAddImg != undefined) {
-    con.query(`DELETE FROM images WHERE id=${data.delAddImg}`, function (err) {
-      if (err) throw err;
+  }
+
+  if (data.delAddImg != undefined) {
+    data.delAddImg.forEach((elem) => {
+      console.log(elem);
+      con.query(`DELETE FROM images WHERE id=${elem}`, function (err) {
+        if (err) throw err;
+      });
     });
   }
 

@@ -1,6 +1,6 @@
 // getting imgs for editing additional images
 let additionalBlock = document.querySelector(".additional_images");
-let deleteImg;
+let deleteImg = [];
 
 // getting all forms for pushing to db
 let updatingForm = document.querySelector(".update-form-img");
@@ -70,9 +70,8 @@ inputFile.addEventListener("change", function (event) {
 });
 
 additionalBlock.addEventListener("click", (event) => {
-  deleteImg = Number(event.target.alt);
-
-  event.target.remove()
+  deleteImg.push(Number(event.target.alt));
+  event.target.remove();
 });
 
 updatingForm.addEventListener("submit", function () {
