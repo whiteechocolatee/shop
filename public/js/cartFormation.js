@@ -23,7 +23,7 @@ function addToCart() {
 // reloading cart info
 function ajaxGetGoodsInfo() {
   cartUpdateLocalStorage();
-  fetch("/cartGettingGoodsInfo", {
+  fetch("/cartGoodsInfo", {
     method: "POST",
     body: JSON.stringify({ key: Object.keys(cart) }),
     headers: {
