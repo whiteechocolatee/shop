@@ -5,7 +5,6 @@ div(class='wrapper')
 
         div(class='admin-btns')
             a(href="/admin" class='btn btn-primary') Назад <- 
-            a(class='btn btn-danger clear-table' href='clear-table') Очистить
             button(class='btn btn-download btn-link') Импорт
 
         h3 ИНФОРМАЦИЯ О ЗАКАЗЕ
@@ -40,7 +39,7 @@ div(class='wrapper')
 
 
         // adding script to sorting table of orders, and convert html table to excel
-        script(src="js/table2excel.js")
-        script(src="js/tablesort.min.js")
-        script(src="js/orderTable.js")
+        script(src="/js/libs/table2excel.js")
+        script(src="/js/libs/tablesort.min.js")
+        script(src="/js/admin/orderTable.js")
 include footer

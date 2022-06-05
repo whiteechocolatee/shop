@@ -35,7 +35,7 @@ inputFile.addEventListener("change", function (event) {
 });
 
 addingForm.addEventListener("submit", function (e) {
-  fetch("/add-new-item", {
+  fetch("/addingNewItem", {
     method: "POST",
     body: JSON.stringify({
       name: itemName.value.trim(),
@@ -53,9 +53,9 @@ addingForm.addEventListener("submit", function (e) {
       return response.text();
     })
     .then(function (body) {
-      if (body == "1") {
+      if (body === "1") {
         alert("Товар добавлен!");
-      } else if (body == "0") {
+      } else if (body === "0") {
         alert("Произошла ошибка!");
       }
     });

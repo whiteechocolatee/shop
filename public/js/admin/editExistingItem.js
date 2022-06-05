@@ -97,7 +97,7 @@ additionalBlock.addEventListener("click", function (event) {
 
 // updating card data
 updatingForm.addEventListener("submit", function () {
-  fetch("/update-item", {
+  fetch("/updateItem", {
     method: "POST",
     body: JSON.stringify({
       name: itemName.value.trim(),
@@ -120,9 +120,9 @@ updatingForm.addEventListener("submit", function () {
       return response.text();
     })
     .then(function (body) {
-      if (body == "1") {
+      if (body === "1") {
         alert("Товар обновлен!");
-      } else if (body == "0") {
+      } else if (body === "0") {
         alert("Произошла ошибка!");
       }
     });

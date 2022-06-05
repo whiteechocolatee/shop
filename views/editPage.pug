@@ -5,9 +5,9 @@ div(class='wrapper')
         h2 Редактирование товара
         div(class='row')
             div(class='admin-btns')
-                    a(href="/admin-goods" class='btn btn-primary') Назад <- 
+                    a(href="/admin/goods" class='btn btn-primary') Назад <- 
                     a(href="/admin" class='btn btn-primary') На главную 
-            form(action="/upload-edited-image" class='update-form-img needs-validation' method='post' enctype='multipart/form-data') 
+            form(action="/uploadEditedImage" class='update-form-img needs-validation' method='post' enctype='multipart/form-data') 
                 h2 Управления редактивания
                 div(class='btns-control')
                     div
@@ -23,10 +23,10 @@ div(class='wrapper')
                     div(class='card-holder')
                         div(class='card-content')
                             div(class='card-img')
-                                img(src='./images/'+val['image'] class='admin-img rounded' id="img1")
+                                img(src='/images/'+val['image'] class='admin-img rounded' id="img1")
                                 div(class='additional_images')
                                     each value,index in images
-                                        img(src='./images/'+value['path'] id='img2' alt=value['id'] class='admin-img admin-small-img rounded')
+                                        img(src='/images/'+value['path'] id='img2' alt=value['id'] class='admin-img admin-small-img rounded')
                             div(class='card-description')
                                 div(class='item-colors')
                                     label(for='item-edit-сolor') Обновление цветов&nbsp;
@@ -54,5 +54,5 @@ div(class='wrapper')
                                 div
                                     span(class='id')= val['id']
                 button(type="submit" class='btn btn-success') Обновить
-            script(src='js/editItem.js')
+            script(src='/js/admin/editExistingItem.js')
 include footer

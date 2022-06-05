@@ -11,7 +11,7 @@ window.addEventListener("scroll", (e) => {
 
 // sending request to getting categories
 function getCategoryList() {
-  fetch("/get-category-list", { method: "POST" })
+  fetch("/gettingCategories", { method: "POST" })
     .then((response) => {
       return response.text();
     })
@@ -22,13 +22,13 @@ function getCategoryList() {
 
 // rendering navigation
 function showCategoryList(data) {
-  let out = `<ul class="navbar__nav"><li><a href='/'>Главная</a></li>`;
+  let list = `<ul class="navbar__nav"><li><a href='/main'>Главная</a></li>`;
   for (let i = 0; i < data.length; i++) {
-    out += `<li><a href='/cat?id=${data[i]["id"]}'>${data[i]["category"]}</a></li>`;
+    list += `<li><a href='/main/category?id=${data[i]["id"]}'>${data[i]["category"]}</a></li>`;
   }
-  out += `<li class='cart-header navbar__nav ordered'>
+  list += `<li class='cart-header navbar__nav ordered'>
               <h3>
-                  <a href='/order' class='cart-counter'>
+                  <a href='/main/order' class='cart-counter'>
                       <i class="bi bi-bag"></i>
                       <span class='total-items'></span>
                   </a>
@@ -36,7 +36,7 @@ function showCategoryList(data) {
           </li>
       </ul>`;
 
-  document.querySelector("#category-list").innerHTML = out;
+  document.querySelector("#category-list").innerHTML = list;
 }
 
 getCategoryList();

@@ -9,7 +9,7 @@ div(class='wrapper')
                 div(class='profile-img')
                     a(data-fancybox="gallery" href="./images/"+goods[0]['image'])
                         img(
-                            src="./images/"+goods[0]['image']
+                            src="/images/"+goods[0]['image']
                             alt="item"
                             class='goods-big-image responsive-img rounded'
                             )
@@ -17,7 +17,7 @@ div(class='wrapper')
                         each val,index in images
                             div(class='small-img-card')
                                 a(data-fancybox="gallery" href="./images/"+val['path'])
-                                    img(class="responsive-img rounded" src="./images/"+val['path'])
+                                    img(class="responsive-img rounded" src="/images/"+val['path'])
                 div(class='profile-description')
                     h1(class='title-panel')= goods[0]['name']
                     p(class='goods-description')= goods[0]['description']
@@ -25,7 +25,7 @@ div(class='wrapper')
                         span #{goods[0]['cost']}&nbsp; 
                         |uah
                     div(class='color-picker')
-                        each value in colors 
+                        each value in colors
                             input(type='color' class='goods-colors' value=value['color'] disabled)
                     button(
                         class='btn btn-dark add-to-cart'

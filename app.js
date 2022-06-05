@@ -12,9 +12,6 @@ const mysql = require("mysql");
 const port = 3000;
 const hostname = "127.0.0.1";
 
-// nodemailer
-const nodemailer = require("nodemailer");
-
 // multer
 const multer = require("multer");
 
@@ -29,7 +26,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// add hashValidator &
+// connect nodemailer function to send mails to clients
+const sendDataMail = require("./server/sendMailToCustomer");
+
+// connect savingOrder function
+const savingOrder = require("./server/savingOrderToDB");
+
+// add hashValidator & hashGeneration
 const hashValidation = require("./public/js/hashValidation");
 const hashGeneration = require("./public/js/hashGeneration");
 
@@ -41,37 +44,34 @@ const con = mysql.createConnection({
   database: "market",
 });
 
-// reading json
-app.use(express.json());
-
-// adding middleware function for parsing requset body
-app.use(express.urlencoded());
-
-// adding cookie parser
-app.use(cookieParser());
-
-// adding static files to server
-app.use(express.static(__dirname + "/public"));
-
-// adding hash validation to admin panel
-app.use((req, res, next) => {
-  if (req.originalUrl == "/admin" || req.originalUrl == "/admin-orders") {
-    hashValidation(res, req, con, next);
-  } else {
-    next();
-  }
-});
+app
+  // reading json
+  .use(express.json())
+  // adding middleware function for parsing requset body
+  .use(express.urlencoded())
+  // adding cookie parser
+  .use(cookieParser())
+  // static files at server
+  .use(express.static(__dirname + "/public"))
+  // adding hash validation to admin panel
+  .use((req, res, next) => {
+    if (req.originalUrl == "/admin" || req.originalUrl == "/admin-orders") {
+      hashValidation(res, req, con, next);
+    } else {
+      next();
+    }
+  });
 
 // adding pug
 app.set("view engine", "pug");
 
 // listening port
 app.listen(port, hostname, () => {
-  console.log(`Server working on http://${hostname}:${port}`);
+  console.log(`Server working on http://${hostname}:${port}/main`);
 });
 
 // getting main page
-app.get("/", function (req, res) {
+app.get("/main", function (req, res) {
   // taking 3 goods from every category and rendering main page
   let goodsName = new Promise(function (resolve, reject) {
     con.query(
@@ -101,7 +101,7 @@ app.get("/", function (req, res) {
 });
 
 // get adress of categories with id
-app.get("/cat", function (req, res) {
+app.get("/main/category", function (req, res) {
   let categoryId = req.query["id"];
   // get category id,and getting data from db
   let category = new Promise((resolve, reject) => {
@@ -144,7 +144,7 @@ app.get("/cat", function (req, res) {
 });
 
 //sending items to goods page
-app.get("/goods", function (req, res) {
+app.get("/main/category/goods", function (req, res) {
   let goodsId = req.query.id;
 
   let goodsData = new Promise((resolve, reject) => {
@@ -190,17 +190,17 @@ app.get("/goods", function (req, res) {
 });
 
 // render order page
-app.get("/order", function (req, res) {
+app.get("/main/order", function (req, res) {
   res.render("orderPage");
 });
 
 // admin panel
 app.get("/admin", function (req, res) {
-  res.render("admin", {});
+  res.render("adminPanel", {});
 });
 
 // adminPanel orders
-app.get("/admin-orders", function (req, res) {
+app.get("/admin/orders", function (req, res) {
   con.query(
     `SELECT 
       shop_order.id as id,
@@ -226,7 +226,7 @@ app.get("/admin-orders", function (req, res) {
 });
 
 // rendering admin goods
-app.get("/admin-goods", function (req, res) {
+app.get("/admin/goods", function (req, res) {
   con.query("SELECT * FROM goods", function (err, result, fileds) {
     if (err) throw err;
     res.render("adminGoods", { goods: JSON.parse(JSON.stringify(result)) });
@@ -243,27 +243,13 @@ app.get("/agreement", function (req, res) {
   res.render("agreement", {});
 });
 
-// func for clearing order table
-app.get("/clear-table", function (req, res) {
-  let sqlTruncateOrders = "TRUNCATE TABLE shop_order";
-  let sqlTruncateUsers = "TRUNCATE TABLE user_info";
-
-  con.query(sqlTruncateOrders, function (err, result) {
-    if (err) throw err;
-    con.query(sqlTruncateUsers, function (err, result) {
-      if (err) throw err;
-    });
-    res.redirect("/admin-orders");
-  });
-});
-
 //adding new item
-app.get("/add-new-item", function (req, res) {
+app.get("/admin/goods/createNewItem", function (req, res) {
   res.render("addNewItem");
 });
 
 //edit card page
-app.get("/edit", function (req, res) {
+app.get("/admin/goods/edit", function (req, res) {
   let goodsId = req.query.id;
 
   let goodsData = new Promise((resolve, reject) => {
@@ -309,20 +295,20 @@ app.get("/edit", function (req, res) {
 });
 
 // saving image to folder
-app.post("/add-new-photo", upload.single("image"), function (req, res) {
-  res.redirect("/admin-goods");
+app.post("/addingNewImage", upload.single("image"), function (req, res) {
+  res.redirect("/admin/goods");
 });
 
 // saving edited image to folder
-app.post("/upload-edited-image", upload.single("editedImage"), function (
+app.post("/uploadEditedImage", upload.single("editedImage"), function (
   req,
   res
 ) {
-  res.redirect("/admin-goods");
+  res.redirect("/admin/goods");
 });
 
 // update data goods
-app.post("/update-item", function (req, res) {
+app.post("/updateItem", function (req, res) {
   let data = req.body;
   let sqlRequest;
 
@@ -380,7 +366,7 @@ app.post("/update-item", function (req, res) {
 });
 
 // saving new goods to data base
-app.post("/add-new-item", function (req, res) {
+app.post("/addingNewItem", function (req, res) {
   let data = req.body;
 
   con.query(
@@ -423,7 +409,7 @@ app.post("/login", function (req, res) {
 });
 
 // adding goods to cart at nav
-app.post("/get-category-list", function (req, res) {
+app.post("/gettingCategories", function (req, res) {
   con.query("SELECT id,category FROM category", function (err, result, fileds) {
     if (err) throw err;
     res.json(result);
@@ -431,7 +417,7 @@ app.post("/get-category-list", function (req, res) {
 });
 
 // get items in cart
-app.post("/get-goods-info", function (req, res) {
+app.post("/cartGettingGoodsInfo", function (req, res) {
   if (req.body.key != "undefined" && req.body.key.length != 0) {
     con.query(
       "SELECT id, name, cost, image FROM goods WHERE id IN (" +
@@ -452,7 +438,8 @@ app.post("/get-goods-info", function (req, res) {
 });
 
 // sending request to db, get items in cart
-app.post("/finish-order", function (req, res) {
+app.post("/endOfTheOrder", function (req, res) {
+  console.log(res.statusCode);
   let keys;
 
   if (req.body.key != null) {
@@ -468,93 +455,12 @@ app.post("/finish-order", function (req, res) {
         if (err) throw err;
         savingOrder(req.body, result);
         sendDataMail(req.body, result).catch(console.error);
+
         res.send("1");
+        res.statusCode;
       }
     );
   } else if (keys.length == undefined || keys.length == 0) {
     res.send("0");
   }
 });
-
-// saving order to data base
-function savingOrder(data, res) {
-  let sqlRequest;
-
-  sqlRequest = `INSERT INTO user_info (user_name, user_email, user_phone, adress) VALUES ('${data.userName}','${data.email}','${data.phoneNumber}','${data.adress}')`;
-
-  con.query(sqlRequest, function (error, result) {
-    if (error) throw error;
-
-    let userId = result.insertId;
-
-    let date = Math.trunc(new Date() / 1000);
-
-    for (let i = 0; i < res.length; i++) {
-      sqlRequest = `INSERT INTO shop_order (date,user_id, goods_id,goods_cost, goods_amount, total) VALUES (${date},${userId},${
-        res[i]["id"]
-      },${res[i]["cost"]},${data.key[res[i]["id"]]},${
-        data.key[res[i]["id"]] * res[i]["cost"]
-      })`;
-      con.query(sqlRequest, function (error, result) {
-        if (error) throw error;
-      });
-    }
-  });
-}
-
-// connect nodemailer function to send mails to clients
-async function sendDataMail(data, result) {
-  let letter = "<h2>Ваш заказ в магазине ....</h2>";
-  let totalPrice = 0;
-
-  for (let i = 0; i < result.length; i++) {
-    letter += `<p>${result[i]["name"]} - ${data.key[result[i]["id"]]} - ${
-      result[i]["cost"] * data.key[result[i]["id"]]
-    } uah </p>`;
-    totalPrice += result[i]["cost"] * data.key[result[i]["id"]];
-  }
-
-  // making a letter
-  letter += "<hr>";
-  letter += `Сумма заказа: ${totalPrice}`;
-  letter += "<hr>";
-  letter += `<hr>
-                Имя - ${data.userName} </br>
-                Номер телефона - ${data.phoneNumber}`;
-  letter += ` <hr>
-                Данные для отправки - ${data.adress}</br>
-              <hr>  
-                `;
-
-  // create test account
-  let testAccount = await nodemailer.createTestAccount();
-
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false,
-    auth: {
-      user: testAccount.user,
-      pass: testAccount.pass,
-    },
-  });
-
-  let mailOption = {
-    from: "<creatuseandr@icloud.com>",
-    to: data.email,
-    subject: "shop order",
-    text: letter,
-    html: letter,
-  };
-
-  // send mail with defined transport object
-  let info = await transporter.sendMail(mailOption);
-
-  console.log("MessageSent: %s", info.messageId);
-
-  // getting URL for watching message
-  console.log("PreviewSent: %s", nodemailer.getTestMessageUrl(info));
-
-  return true;
-}

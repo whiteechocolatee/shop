@@ -293,13 +293,28 @@ body {
   }
 }
 
+.color-picker {
+  height: 30px;
+}
+
 .goods-colors {
+  cursor: pointer;
+  margin: 0 5px;
   -webkit-appearance: none;
   border: none;
   background: #fff;
   width: 30px;
   height: 30px;
   border-radius: 50%;
+  border: 1.5px solid #edeaed;
+  padding: 0.5px;
+}
+
+.selected-color {
+  border: 1px solid black;
+  padding: 2px;
+  width: 32px;
+  height: 32px;
 }
 
 /* -webkit */
@@ -527,7 +542,6 @@ hr {
   color: #f2f2f2;
   font-family: "CormorantGaramond", serif;
 }
-
 
 .absolution {
   top: 10;
@@ -841,6 +855,11 @@ header {
 .cart-price {
   display: flex;
   justify-content: space-between;
+}
+
+.cart-price p {
+  display: flex;
+  align-items: center;
 }
 
 #cart-nav {

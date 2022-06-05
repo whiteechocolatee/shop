@@ -3,11 +3,11 @@ include header
 div(class='container')
     div(class='row')
         div(class='admin-btns')
-            a(href="/admin-goods" class='btn btn-primary') Назад <- 
+            a(href="/admin/goods" class='btn btn-primary') Назад <- 
             a(href="/admin" class='btn btn-primary') На главную 
         div(class='content')
             h3 Добавьте свой товар
-            form(action="/add-new-photo" class='save-img needs-validation' method='post' enctype='multipart/form-data') 
+            form(action="/addingNewImage" class='save-img needs-validation' method='post' enctype='multipart/form-data') 
                 label Выберите фото
                 br
                 input(type="file" class='added-img' title='Text' name='image')
@@ -34,5 +34,5 @@ div(class='container')
 
                 button(type="submit" class='btn btn-success') Добавить карточку
 
-    script(src='js/addItem.js')
+    script(src='/js/admin/addNewItem.js')
     include footer

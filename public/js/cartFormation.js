@@ -23,7 +23,7 @@ function addToCart() {
 // reloading cart info
 function ajaxGetGoodsInfo() {
   cartUpdateLocalStorage();
-  fetch("/get-goods-info", {
+  fetch("/cartGettingGoodsInfo", {
     method: "POST",
     body: JSON.stringify({ key: Object.keys(cart) }),
     headers: {
@@ -41,8 +41,8 @@ function ajaxGetGoodsInfo() {
 
 // rendering cart
 function showCart(data) {
-  let out = ``;
-  let check = `
+  let cardBody = ``;
+  let checkBody = `
       <div class="check-card">
         <div class="check-header">
           <h3>
@@ -57,10 +57,10 @@ function showCart(data) {
   let totalCart = 0;
 
   for (let key in cart) {
-    out += `
+    cardBody += `
     <div class="cart-card">
     <div class="cart-img">
-        <img class="responsive-img rounded" src="./images/${
+        <img class="responsive-img rounded" src="/images/${
           data[key]["image"]
         }" />
     </div>
@@ -72,7 +72,9 @@ function showCart(data) {
         </h4>
         <div class="cart-price">
             <p>Размер</p>
-            <p>Цвет</p>
+            <p>
+              Цвет&nbsp;<input type='color' class='goods-colors' value='' disabled/>
+            </p>
         </div>
         <div class="cart-total">
             <p class="cart-item-quantity">
@@ -98,7 +100,7 @@ function showCart(data) {
 </div>
       `;
 
-    check += `
+    checkBody += `
           <div class="check-description">
             <span>
               ${data[key]["name"]}
@@ -113,7 +115,7 @@ function showCart(data) {
     totalItemCart += cart[key]; // общее колво вещей в корзине
   }
 
-  check += `
+  checkBody += `
         </div>
         <hr>
         <div class="check-footer">
@@ -134,8 +136,8 @@ function showCart(data) {
   }
 
   document.querySelector(".total-items").innerHTML = totalItemCart;
-  document.querySelector(".cart-cards").innerHTML = out;
-  document.querySelector(".cart-check").innerHTML = check;
+  document.querySelector(".cart-cards").innerHTML = cardBody;
+  document.querySelector(".cart-check").innerHTML = checkBody;
 
   document.querySelectorAll(".cart-add").forEach((el) => {
     el.onclick = cartAdd;

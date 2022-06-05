@@ -6,18 +6,18 @@ div(class='wrapper')
         div(class='row')
             div(class='admin-btns')
                 a(href="/admin" class='btn btn-primary') Назад <- 
-                a(href="/add-new-item" class='btn btn-success') Добавить товар 
+                a(href="/admin/goods/createNewItem" class='btn btn-success') Добавить товар 
             div(class='cards-gallery')
                 each val,index in goods
                     div(class='card mb-3 admin-card')
                         div(class='row g-0 card-content')
                             div(class="col-xl-4 admin-img-container")
-                                img(src='./images/'+val['image'] class="img-fluid admin-img rounded" alt="sweetshot")
+                                img(src='/images/'+val['image'] class="img-fluid admin-img rounded" alt="sweetshot")
                             div(class="col-md-8")
                                 div(class="card-body")
                                     div(class='card-head') 
                                         h5(class="card-title admin-title")= val['name']
-                                        a(href='edit?id='+val['id']) edit 
+                                        a(href='/admin/goods/edit?id='+val['id']) edit 
                                     p(class="card-text admin-description")= val['description']
                                     span(class="card-text") Цена-
                                         b #{val['cost']} 
