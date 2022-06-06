@@ -97,7 +97,7 @@ additionalBlock.addEventListener("click", function (event) {
 
 // updating card data
 updatingForm.addEventListener("submit", function () {
-  fetch("/updateItem", {
+  fetch("/admin/goods/updateItem", {
     method: "POST",
     body: JSON.stringify({
       name: itemName.value.trim(),

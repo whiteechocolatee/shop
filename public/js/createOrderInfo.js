@@ -26,7 +26,7 @@ form.addEventListener(
       form.classList.add("was-validated");
       return;
     }
-    fetch("/endOfTheOrder", {
+    fetch("/main/endOfTheOrder", {
       method: "POST",
       body: JSON.stringify({
         userName: username.value.trim(),

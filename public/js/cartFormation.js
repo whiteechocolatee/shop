@@ -23,7 +23,7 @@ function addToCart() {
 // reloading cart info
 function ajaxGetGoodsInfo() {
   cartUpdateLocalStorage();
-  fetch("/cartGoodsInfo", {
+  fetch("/main/cartGoodsInfo", {
     method: "POST",
     body: JSON.stringify({ key: Object.keys(cart) }),
     headers: {
@@ -66,7 +66,7 @@ function showCart(data) {
     </div>
     <div class="cart-info">
         <h4>
-            <a href='goods?id=${key}'>
+            <a href='main/>/main/category/goods?id=${key}'>
                 ${data[key]["name"]}
             </a>
         </h4>

@@ -7,7 +7,7 @@ div(class='container')
             a(href="/admin" class='btn btn-primary') На главную 
         div(class='content')
             h3 Добавьте свой товар
-            form(action="/addingNewImage" class='save-img needs-validation' method='post' enctype='multipart/form-data') 
+            form(action="/admin/goods/addingNewImage" class='save-img needs-validation' method='post' enctype='multipart/form-data') 
                 label Выберите фото
                 br
                 input(type="file" class='added-img' title='Text' name='image')

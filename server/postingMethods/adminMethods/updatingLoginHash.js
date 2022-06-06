@@ -20,7 +20,7 @@ module.exports = function updatingLoginHash(req, res) {
       if (err) throw err;
 
       if (result.length == 0 || result == null) {
-        res.redirect("/login");
+        res.redirect("/admin/login");
       } else {
         result = JSON.parse(JSON.stringify(result));
 

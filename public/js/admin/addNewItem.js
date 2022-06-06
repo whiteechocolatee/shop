@@ -35,7 +35,7 @@ inputFile.addEventListener("change", function (event) {
 });
 
 addingForm.addEventListener("submit", function (e) {
-  fetch("/addingNewItem", {
+  fetch("/admin/goods/addingNewItem", {
     method: "POST",
     body: JSON.stringify({
       name: itemName.value.trim(),

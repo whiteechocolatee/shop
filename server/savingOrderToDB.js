@@ -27,9 +27,9 @@ module.exports = function savingOrder(data, res) {
       },${res[i]["cost"]},${data.key[res[i]["id"]]},${
         data.key[res[i]["id"]] * res[i]["cost"]
       })`;
+      con.query(sqlRequest, function (error, result) {
+        if (error) throw error;
+      });
     }
-    con.query(sqlRequest, function (error, result) {
-      if (error) throw error;
-    });
   });
 };

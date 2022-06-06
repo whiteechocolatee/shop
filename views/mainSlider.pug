@@ -1,5 +1,5 @@
 div(id="mainCarousel" class="carousel")
     each val,index in goods
         div(class="carousel__slide")
-            a(href='goods?id='+val['id'])
+            a(href='main/category/goods?id='+val['id'])
                 img(src='/images/'+val['image'] class="carousel-img" alt="...")

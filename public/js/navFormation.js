@@ -11,7 +11,7 @@ window.addEventListener("scroll", (e) => {
 
 // sending request to getting categories
 function getCategoryList() {
-  fetch("/gettingCategories")
+  fetch("/main/gettingCategories")
     .then((response) => {
       return response.text();
     })

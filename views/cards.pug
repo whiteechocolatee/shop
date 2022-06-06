@@ -3,12 +3,11 @@ div(class='main-card '+val['type'])
     div(class='main-card-content')
         a(href='/main/category/goods?id='+val['id'] class='card-link')
             h2(class='title')= val['name']
-            p(class='copy')= val['description']
             p #{val['cost']}₴
         button(
         data-goods_id= val['id']
         class="button-card add-to-cart"
-            ) Купить
+            ) Добавить в корзину
 
 
 
