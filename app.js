@@ -3,6 +3,8 @@ const express = require("express"),
   app = express(),
   cookieParser = require("cookie-parser");
 
+const mysql = require("mysql");
+
 // all functions
 const hashValidation = require("./server/hashValidation"),
   adminRoute = require("./server/routes/adminRoutes"),
@@ -10,6 +12,13 @@ const hashValidation = require("./server/hashValidation"),
 
 const port = 3000,
   hostname = "127.0.0.1";
+
+const con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "root",
+  database: "market",
+});
 
 app
   .use(express.json())

@@ -8,11 +8,11 @@ const showingCart = require("../postingMethods/showingCart");
 const router = express.Router();
 
 router.route("/").get((req, res) => {
-  lastUploadedFiles(req, res, "main");
+  lastUploadedFiles(req, res, "mainPage");
 });
 
 router.route("/order/agreement").get((req, res) => {
-  res.render("agreement");
+  res.render("agreementPage");
 });
 
 router.route("/order").get((req, res) => {
@@ -20,11 +20,11 @@ router.route("/order").get((req, res) => {
 });
 
 router.route("/category").get((req, res) => {
-  pageOfCategories(req, res, "category");
+  pageOfCategories(req, res, "categoryPage");
 });
 
 router.route("/category/goods").get((req, res) => {
-  productInformation(req, res, "goods");
+  productInformation(req, res, "itemPage");
 });
 
 router.route("/gettingCategories").get((req, res) => {

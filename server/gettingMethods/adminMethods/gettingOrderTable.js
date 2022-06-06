@@ -27,7 +27,7 @@ module.exports = function orderTablePage(req, res, renderingPage) {
         ON shop_order.user_id = user_info.id ORDER BY id DESC`,
     function (err, result, fileds) {
       if (err) throw err;
-      res.render("orderPanel", { orders: JSON.parse(JSON.stringify(result)) });
+      res.render(renderingPage, { orders: JSON.parse(JSON.stringify(result)) });
     }
   );
 };

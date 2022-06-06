@@ -1,18 +1,18 @@
-include header 
+include headerModule 
 
-include navigationHeader
+include navigationHeaderModule
 
 div(class='wrapper')
     div(class='wrap main-content')
-        include mainContent
+        include mainResponsiveModuleLG
         div(class='container-lg second-page')
             div(class='container item-content')
                 div(class='item-description')    
                     h2(class='main-title') Вам может понравиться
                     hr(class='content-line-second')
             div(class='col col-lg-12')
-                include mainSlider
-                include smallDevice       
+                include mainSliderModuleLG
+                include smallDeviceModuleSM       
     script(src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js")
     script(src="/js/mainPageCarousel.js")
-include footer 
+include footerModule

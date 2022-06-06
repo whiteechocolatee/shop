@@ -1,6 +1,6 @@
-include header 
+include headerModule 
 
-include navigationHeader
+include navigationHeaderModule
 
 div(class='wrapper')
     h1(class='big-logo absolution') D R E S S
@@ -15,6 +15,6 @@ div(class='wrapper')
                             li(class='filtration-li' data-filter= value['type'])= value['type']
             div(class='cards-container')
                     each val,index in goods
-                        include cards
+                        include cardsModule
     script(src='/js/productNavigation.js') 
-include footer
+include footerModule

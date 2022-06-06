@@ -21,23 +21,23 @@ const updatingItems = require("../postingMethods/adminMethods/updatingItems");
 const updatingLoginHash = require("../postingMethods/adminMethods/updatingLoginHash");
 
 router.route("/").get((req, res) => {
-  res.render("adminPanel");
+  res.render("adminStartingPage");
 });
 
 router.route("/orders").get((req, res) => {
-  gettingOrderTable(req, res, "orderPanel");
+  gettingOrderTable(req, res, "adminOrderTable");
 });
 
 router.route("/goods/createNewItem").get((req, res) => {
-  res.render("addNewItem");
+  res.render("adminCreateNewItemPage");
 });
 
 router.route("/goods/edit").get((req, res) => {
-  productInformation(req, res, "editPage");
+  productInformation(req, res, "adminEditPage");
 });
 
 router.route("/goods").get((req, res) => {
-  goodsData(req, res, "adminGoods");
+  goodsData(req, res, "adminGoodsGalleryPage");
 });
 
 router.route("/goods/updateItem").post((req, res) => {
@@ -63,7 +63,7 @@ router.route("/goods/addingNewItem").post((req, res) => {
 router
   .route("/login")
   .get((req, res) => {
-    res.render("loginPage");
+    res.render("adminLoginPage");
   })
   .post((req, res) => {
     updatingLoginHash(req, res);
