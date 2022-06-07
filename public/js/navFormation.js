@@ -1,3 +1,4 @@
+import fetchingData from "./fetch.js";
 let navbar = document.getElementById("navbar").classList;
 let active_class = "navbar_scrolled";
 
@@ -11,13 +12,11 @@ window.addEventListener("scroll", (e) => {
 
 // sending request to getting categories
 function getCategoryList() {
-  fetch("/main/gettingCategories")
-    .then((response) => {
-      return response.text();
-    })
-    .then((body) => {
-      showCategoryList(JSON.parse(body));
-    });
+  fetchingData("/main/gettingCategories", {
+    method: "GET",
+  }).then((data) => {
+    showCategoryList(data);
+  });
 }
 
 // rendering navigation

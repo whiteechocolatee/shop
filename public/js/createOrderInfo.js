@@ -1,3 +1,6 @@
+import fetchingData from "./fetch.js";
+import Toast from "./modalWindows.js";
+
 // getting form for validation
 let form = document.querySelector(".needs-validation");
 
@@ -5,16 +8,23 @@ let form = document.querySelector(".needs-validation");
 let username = document.querySelector("#name");
 let email = document.querySelector("#email");
 let number = document.querySelector("#phoneNumber");
-let city = document.querySelector("#city");
-let state = document.querySelector("#state");
 let adress = document.querySelector("#validationTextarea");
 
 //adding input mask for validation
 let maskOptions = {
   mask: "+{38} (000) 000-00-00",
 };
-
 let mask = IMask(number, maskOptions);
+
+// reloading function
+
+const clearLocalStorageData = () => {
+  localStorage.removeItem("cart");
+  setTimeout(() => {
+    location.reload();
+    window.location.replace("/main");
+  }, 4000);
+};
 
 // submit order
 form.addEventListener(
@@ -26,7 +36,7 @@ form.addEventListener(
       form.classList.add("was-validated");
       return;
     }
-    fetch("/main/endOfTheOrder", {
+    fetchingData("/main/endOfTheOrder", {
       method: "POST",
       body: JSON.stringify({
         userName: username.value.trim(),
@@ -39,36 +49,21 @@ form.addEventListener(
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-    })
-      .then(function (response) {
-        return response.text();
-      })
-      .then(function (body) {
-        if (body == "1") {
-          Swal.fire({
-            title: "Отлично!",
-            text: "Ваш заказ принят, скоро с вами свяжутся!",
-            icon: "success",
-            footer: '<a href="/main">Продолжить покупки</a>',
-          });
-          localStorage.clear();
-          setTimeout(() => {
-            location.reload();
-            window.location.replace("/main");
-          }, 3000);
-        } else if (body == "0") {
-          Swal.fire({
-            icon: "error",
-            title: "Что-то пошло не так...",
-            text: "Ваша корзина пуста!",
-            footer: '<a href="/main">Вернуться на главную</a>',
-          });
-          setTimeout(() => {
-            location.reload();
-            window.location.replace("/main");
-          }, 3000);
-        }
-      });
+    }).then((response) => {
+      if (response === 200) {
+        Toast.fire({
+          icon: "success",
+          title: "Спасибо за заказ!",
+        });
+        clearLocalStorageData();
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: "Что-то пошло не так :(",
+        });
+        clearLocalStorageData();
+      }
+    });
   },
   false
 );

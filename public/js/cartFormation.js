@@ -1,3 +1,4 @@
+import fetchingData from "./fetch.js";
 let cart = {};
 
 document.querySelectorAll(".add-to-cart").forEach((element) => {
@@ -23,20 +24,16 @@ function addToCart() {
 // reloading cart info
 function ajaxGetGoodsInfo() {
   cartUpdateLocalStorage();
-  fetch("/main/cartGoodsInfo", {
+  fetchingData("/main/cartGoodsInfo", {
     method: "POST",
     body: JSON.stringify({ key: Object.keys(cart) }),
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-  })
-    .then(function (response) {
-      return response.text();
-    })
-    .then(function (body) {
-      showCart(JSON.parse(body));
-    });
+  }).then((data) => {
+    showCart(data);
+  });
 }
 
 // rendering cart
@@ -73,7 +70,7 @@ function showCart(data) {
         <div class="cart-price">
             <p>Размер</p>
             <p>
-              Цвет&nbsp;<input type='color' class='goods-colors' value='' disabled/>
+              Цвет&nbsp;<input type='color' class='goods-colors'  disabled/>
             </p>
         </div>
         <div class="cart-total">
