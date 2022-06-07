@@ -26,10 +26,10 @@ module.exports = function savingCartData(req, res) {
         if (err) throw err;
         savingOrder(req.body, result);
         sendDataMail(req.body, result).catch(console.error);
-        res.send("1");
+        res.respond(200);
       }
     );
   } else if (keys.length == undefined || keys.length == 0) {
-    res.send("0");
+    res.fail();
   }
 };

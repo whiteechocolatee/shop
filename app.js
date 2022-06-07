@@ -1,7 +1,8 @@
 // connecct express
 const express = require("express"),
   app = express(),
-  cookieParser = require("cookie-parser");
+  cookieParser = require("cookie-parser"),
+  responseHelper = require("express-response-helper").helper();
 
 const mysql = require("mysql");
 
@@ -23,6 +24,7 @@ const con = mysql.createConnection({
 app
   .use(express.json())
   .use(express.urlencoded())
+  .use(responseHelper)
   .use(cookieParser())
   .use(express.static(__dirname + "/public"))
   .use((req, res, next) => {
@@ -38,9 +40,7 @@ app
   })
   .use("/admin", adminRoute)
   .use("/main", mainRoute)
-  .set("view engine", "pug");
-
-// listening port
-app.listen(port, hostname, () => {
-  console.log(`Server working on http://${hostname}:${port}/main`);
-});
+  .set("view engine", "pug")
+  .listen(port, hostname, () => {
+    console.log(`Server working on http://${hostname}:${port}/main`);
+  });
