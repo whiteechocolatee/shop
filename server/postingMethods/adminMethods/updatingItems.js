@@ -18,7 +18,8 @@ module.exports = function updatingItems(req, res) {
           description = '${data.description}',
           cost = '${data.cost}',
           category = '${data.category}',
-          type = '${data.type}'
+          type = '${data.type}',
+          data_type = '${data.data_type}'
       WHERE id = ${data.id}
       `;
   } else {
@@ -29,7 +30,8 @@ module.exports = function updatingItems(req, res) {
           cost = '${data.cost}',
           image = '${data.image}',
           category = '${data.category}',
-          type = '${data.type}'
+          type = '${data.type}',
+          data_type = '${data.data_type}'
       WHERE id = ${data.id}
       `;
   }

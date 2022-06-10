@@ -1,4 +1,5 @@
 // getting input color for adding colors to item
+import fetchingData from "../fetch.js";
 let colorPicker = document.querySelector(".choose-color");
 let newColors = [];
 
@@ -22,70 +23,52 @@ let arrOfImg = [];
 // showing preview of card image
 inputFile.addEventListener("change", function (event) {
   let target = event.target;
-
   if (!FileReader) {
     alert("Вы не можете использовать этот тип файла");
     return;
   }
-
   if (!target.files.length) {
     alert("Ничего не загружено");
     return;
   }
-
   let fileReader = new FileReader();
-
   fileReader.onload = function () {
     img1.src = fileReader.result;
     img1.style.width = "100%";
     img1.style.height = "auto";
   };
-
   fileReader.readAsDataURL(target.files[0]);
-
   imageName = target.files[0].name;
 });
 
 // adding colors to item
 colorPicker.addEventListener("change", function (event) {
   let chosenColor = event.target.value;
-
   let newColor = document.createElement("input");
-
   newColor.setAttribute("type", "color");
-
   newColor.setAttribute("value", chosenColor);
-
   document.querySelector(".item-colors").append(newColor);
-
   newColors.push(Array(Number(idOfItem.innerHTML), chosenColor));
 });
 
 // adding additional images
 addMoreImg.addEventListener("change", function (event) {
   let target = event.target;
-
   if (!FileReader) {
     alert("Вы не можете использовать этот тип файла");
     return;
   }
-
   if (!target.files.length) {
     alert("Ничего не загружено");
     return;
   }
-
   let fileReader = new FileReader();
-
   let img2 = document.createElement("img");
-
   fileReader.onload = function () {
     document.querySelector(".additional_images").append(img2);
     img2.src = fileReader.result;
   };
-
   fileReader.readAsDataURL(target.files[0]);
-
   arrOfImg.push(Array(Number(idOfItem.innerHTML), target.files[0].name));
 });
 
@@ -96,8 +79,8 @@ additionalBlock.addEventListener("click", function (event) {
 });
 
 // updating card data
-updatingForm.addEventListener("submit", function () {
-  fetch("/admin/goods/updateItem", {
+updatingForm.addEventListener("submit", () => {
+  fetchingData("/admin/goods/updateItem", {
     method: "POST",
     body: JSON.stringify({
       name: itemName.value.trim(),
@@ -105,7 +88,8 @@ updatingForm.addEventListener("submit", function () {
       cost: itemCost.value.trim(),
       image: imageName,
       category: itemCat.value.trim(),
-      type: itemType.value.trim(),
+      type: itemType.options[itemType.selectedIndex].text.trim(),
+      data_type: itemType.value.trim(),
       id: Number(idOfItem.innerHTML),
       imgArr: arrOfImg,
       delAddImg: deleteImg,
@@ -115,15 +99,5 @@ updatingForm.addEventListener("submit", function () {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-  })
-    .then(function (response) {
-      return response.text();
-    })
-    .then(function (body) {
-      if (body === "1") {
-        alert("Товар обновлен!");
-      } else if (body === "0") {
-        alert("Произошла ошибка!");
-      }
-    });
+  });
 });
