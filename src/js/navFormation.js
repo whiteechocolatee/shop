@@ -1,9 +1,16 @@
 import fetchingData from "./fetch.js";
 let navbar = document.getElementById("navbar").classList;
+let wrapperMenu = document.querySelector(".burger-wrapper");
 let active_class = "navbar_scrolled";
+let responsive_nav = "navbar__small";
 
-window.addEventListener("scroll", (e) => {
-  if (pageYOffset > 100) {
+wrapperMenu.addEventListener("click", () => {
+  wrapperMenu.classList.toggle("open");
+  navbar.toggle(responsive_nav);
+});
+
+window.addEventListener("scroll", () => {
+  if (pageYOffset > 100 && document.documentElement.scrollWidth > 992) {
     navbar.add(active_class);
   } else {
     navbar.remove(active_class);
