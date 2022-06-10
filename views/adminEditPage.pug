@@ -37,8 +37,12 @@ div(class='wrapper')
                                     label(for='item-edit-name') Обновление наименования товара&nbsp;
                                     input(name='item-edit-name' class='update-name' type="text" value=val['name'] required)
                                 div
-                                    label(for='item-edit-type') Обновление типа товара(футболка,худи и тд.)&nbsp;
-                                    input(name='item-edit-name' class='update-type' type="text" value=val['type'] required)
+                                    label(for='item-edit-type') Обновление типа товара(футболка,худи и тд.)
+                                    select(name='item-edit-type' class='update-type' type="text")
+                                        option(value='t-shirt') Футболка   
+                                        option(value='hoodie') Кофта   
+                                        option(value='singlet') Майка
+                                        option(value='sweatshirt') Свитшот
                                 div
                                     label(for='item-edit-description') Обновите описание
                                     textarea(name="item-edit-description" class='update-description' cols="60" rows="5" required)= val['description']
@@ -54,5 +58,5 @@ div(class='wrapper')
                                 div
                                     span(class='id')= val['id']
                 button(type="submit" class='btn btn-success') Обновить
-            script(src='/js/admin/editExistingItem.js')
+            script(type='module' src='/js/admin/editExistingItem.js')
 include footerModule
