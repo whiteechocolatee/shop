@@ -12,7 +12,7 @@ div(class='wrapper')
                     ul
                         li(class='filtration-li selected' data-filter='all') Всё
                         each value in types 
-                            li(class='filtration-li' data-filter= value['type'])= value['type']
+                            li(class='filtration-li' data-filter= value['data_type'])= value['type']
             div(class='cards-container')
                     each val,index in goods
                         include cardsModule

@@ -32,7 +32,7 @@ module.exports = function pageOfCategories(req, res, renderingPage) {
 
   let types = new Promise((resolve, reject) => {
     con.query(
-      "SELECT DISTINCT type FROM goods WHERE category=" + categoryId,
+      "SELECT DISTINCT type, data_type FROM goods WHERE category=" + categoryId,
       function (err, result) {
         if (err) reject(err);
         resolve(result);
