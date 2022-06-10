@@ -332,14 +332,14 @@ body {
 
 .card-body-goods {
   display: flex;
-  flex-wrap: wrap;
 }
 
 .profile-description {
+  width: 40%;
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin: 50px;
+  word-break: break-all;
 }
 
 .add-to-cart {
@@ -353,13 +353,14 @@ body {
   margin-left: 10px;
 }
 
-.profile-img {
-  width: 45%;
+.images-block {
+  width: 55%;
+  display: flex;
+  margin: 10px;
 }
 
-.profile-description p {
-  color: black;
-  font-size: 14px;
+.goods-big-image {
+  width: 600px;
 }
 
 .goods-cost span {
@@ -368,15 +369,20 @@ body {
 
 .small-images {
   display: flex;
-  margin-top: 10px;
-  width: 300px;
-  height: 100px;
+  flex-direction: column;
+  margin-top: 0;
+  width: auto;
+  height: 100%;
+}
+
+.additional-img {
+  width: 70px;
+  height: auto;
+  margin-right: 10px;
 }
 
 .small-img-card {
-  width: 100px;
-  height: 100px;
-  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 a[data-fancybox] img {
@@ -443,14 +449,28 @@ a[data-fancybox] img {
 }
 
 @media (max-width: 992px) {
-  .profile-img {
+  .card-body-goods {
+    flex-wrap: wrap;
+  }
+  .goods-big-image {
     width: 100%;
   }
 
+  .images-block {
+    width: 92%;
+  }
+
+  .additional-img {
+    width: 150px;
+    height: auto;
+    margin-right: 10px;
+  }
+
   .profile-description {
+    text-align: center;
     width: 100%;
     align-items: center;
-    margin: 30px;
+    /* margin: 30px; */
   }
 
   .add-to-cart {
@@ -462,7 +482,7 @@ a[data-fancybox] img {
 /* =========== main page =========== */
 
 .wrapper {
-  min-height: 95%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
 }

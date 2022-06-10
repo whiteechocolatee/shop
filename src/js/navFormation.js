@@ -12,7 +12,7 @@ window.addEventListener("scroll", (e) => {
 
 // sending request to getting categories
 function getCategoryList() {
-  fetchingData("/main/gettingCategories", {
+  fetchingData("/main/categories", {
     method: "GET",
   }).then((data) => {
     showCategoryList(data);

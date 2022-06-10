@@ -27,7 +27,7 @@ router.route("/category/goods").get((req, res) => {
   productInformation(req, res, "itemPage");
 });
 
-router.route("/gettingCategories").get((req, res) => {
+router.route("/categories").get((req, res) => {
   gettingCategories(req, res);
 });
 
