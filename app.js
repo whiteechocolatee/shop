@@ -26,7 +26,7 @@ app
   .use(express.urlencoded())
   .use(responseHelper)
   .use(cookieParser())
-  .use(express.static(__dirname + "/public"))
+  .use(express.static(__dirname + "/src"))
   .use((req, res, next) => {
     if (
       req.originalUrl == "/admin" ||
