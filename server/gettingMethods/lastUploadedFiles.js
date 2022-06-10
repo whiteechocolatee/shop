@@ -8,10 +8,10 @@ const con = mysql.createConnection({
 });
 
 module.exports = function lastUploadedFiles(req, res, renderingPage) {
-  // taking 3 goods from every category and rendering main page
+  // taking 3 last added goods and rendering main page
   let goodsName = new Promise(function (resolve, reject) {
     con.query(
-      "SELECT id,name,description,cost,image,category FROM (SELECT id,name,description,cost,image,category, IF(IF(@curr_category != category,@curr_category := category,'')!= '',@k := 0, @k := @k+1) as ind FROM goods, (SELECT @curr_category := '') v ) goods WHERE ind < 4",
+      `SELECT * FROM goods ORDER BY id DESC LIMIT 6`,
       function (err, result) {
         if (err) reject(err);
         resolve(result);
