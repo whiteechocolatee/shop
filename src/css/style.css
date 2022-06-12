@@ -897,6 +897,12 @@ header {
   display: none;
 }
 
+.pagination {
+  margin: 20px auto;
+}
+
+
+
 /* =========== order form =========== */
 
 .form-space {

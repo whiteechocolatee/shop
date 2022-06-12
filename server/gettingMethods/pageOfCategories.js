@@ -7,7 +7,7 @@ const con = mysql.createConnection({
   database: "market",
 });
 
-const resultsPerPage = 6;
+const resultsPerPage = 9;
 
 module.exports = function pageOfCategories(req, res, renderingPage) {
   let categoryId = req.query["id"];
@@ -34,24 +34,40 @@ module.exports = function pageOfCategories(req, res, renderingPage) {
       const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
       let page = req.query.page ? Number(req.query.page) : 1;
       if (page > numberOfPages) {
-        res.redirect(`&page=` + encodeURIComponent(numberOfPages));
+        res.redirect(
+          `/main/category?id=${categoryId}&page=` +
+            encodeURIComponent(numberOfPages)
+        );
       } else if (page < 1) {
-        res.redirect("&page=" + encodeURIComponent("1"));
+        res.redirect(
+          `/category?id=${categoryId}&page=` + encodeURIComponent("1")
+        );
       }
       const startingLimit = (page - 1) * resultsPerPage;
-      sql = `SELECT * FROM goods WHERE category=${categoryId} LIMIT ${startingLimit},${resultsPerPage} `;
-      con.query(sql, (err, result) => {
-        if (err) throw err;
-        let iterator = page - 5 < 1 ? 1 : page - 5;
-        let endingLink =
-          iterator + 9 <= numberOfPages
-            ? iterator + 9
-            : page + (numberOfPages - page);
-        if (endingLink < page + 4) {
-          iterator -= page + 4 - numberOfPages;
+      con.query(
+        `SELECT * FROM goods WHERE category=${categoryId} LIMIT ${startingLimit},${resultsPerPage} `,
+        (err, result) => {
+          if (err) throw err;
+          let iterator = page - 5 < 1 ? 1 : page - 5;
+          let endingLink =
+            iterator + 9 <= numberOfPages
+              ? iterator + 9
+              : page + (numberOfPages - page);
+          if (endingLink < page + 4) {
+            iterator -= page + 4 - numberOfPages;
+          }
+          let resultArray = Object.values(JSON.parse(JSON.stringify(result)));
+          let pagesArr = [
+            {
+              page: page,
+              numberOfPages: numberOfPages,
+            },
+          ];
+          console.log(pagesArr);
+
+          resolve([resultArray, pagesArr]);
         }
-        resolve(result);
-      });
+      );
     });
   });
 
