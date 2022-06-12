@@ -63,8 +63,6 @@ module.exports = function pageOfCategories(req, res, renderingPage) {
               numberOfPages: numberOfPages,
             },
           ];
-          console.log(pagesArr);
-
           resolve([resultArray, pagesArr]);
         }
       );
