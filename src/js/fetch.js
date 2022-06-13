@@ -1,11 +1,11 @@
-const fetchingData = async (url, settings) => {
+async function fetchingData(url, settings) {
   try {
     let response = await fetch(url, settings);
     let data = await response.json();
     return data;
   } catch (err) {
-    return err;
+    return null;
   }
-};
+}
 
-export default fetchingData;
+export { fetchingData };

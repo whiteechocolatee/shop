@@ -1,4 +1,4 @@
-import fetchingData from "./fetch.js";
+import {fetchingData} from "./fetch.js";
 let navbar = document.getElementById("navbar").classList;
 let wrapperMenu = document.querySelector(".burger-wrapper");
 let active_class = "navbar_scrolled";

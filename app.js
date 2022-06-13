@@ -44,3 +44,7 @@ app
   .listen(port, hostname, () => {
     console.log(`Server working on http://${hostname}:${port}/main`);
   });
+
+app.get("/", (req, res) => {
+  res.redirect("/main");
+});

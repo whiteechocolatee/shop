@@ -1,4 +1,4 @@
-import fetchingData from "./fetch.js";
+import {fetchingData} from "./fetch.js";
 let cart = {};
 
 document.querySelectorAll(".add-to-cart").forEach((element) => {
