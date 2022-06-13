@@ -18,21 +18,6 @@ div(class='wrapper')
                     include cardsModule
             div(class='pagination')
                 each val,index in goods[1]
-                    -let page = val['page']
-                    -let numberOfPages = val['numberOfPages']
-                    nav
-                        ul(class='pagination')
-                            if page > 1
-                                li(class="page-item")
-                                    a(class="page-link" href=`/main/category?id=${category[0]['id']}&page=${page-1}` aria-label="Previous")
-                                        span(aria-hidden="true") &laquo;
-                            -let n = 1  
-                            while n <= numberOfPages 
-                                li(class="page-item")
-                                    a(class="page-link" href=`/main/category?id=${category[0]['id']}&page=${n}`)= n++
-                            if page < numberOfPages
-                                li(class="page-item")
-                                    a(class="page-link" href=`/main/category?id=${category[0]['id']}&page=${page+1}` aria-label="Next")
-                                        span(aria-hidden="true") &raquo;
+                    include paginate
     script(src='/js/productNavigation.js') 
 include footerModule

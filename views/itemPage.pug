@@ -26,6 +26,10 @@ div(class='wrapper')
                     div(class='goods-cost')
                         span #{goods[0]['cost']}&nbsp; 
                         |uah
+                    div(class='size')
+                        select
+                            option(value='s1') S1 (s-m)
+                            option(value='s2') S1 (l-xl)
                     div(class='color-picker')
                         each value in colors
                             input(type='color' class='goods-colors' value=value['color'] disabled)

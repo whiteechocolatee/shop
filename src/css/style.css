@@ -336,10 +336,18 @@ body {
 
 .profile-description {
   width: 40%;
+  height: 400px;
   display: flex;
+  justify-content: space-around;
   flex-direction: column;
   align-content: center;
   word-break: break-all;
+}
+
+.size select {
+  width: 150px;
+  padding: 3px;
+  border-radius: 10px;
 }
 
 .add-to-cart {
@@ -900,8 +908,6 @@ header {
 .pagination {
   margin: 20px auto;
 }
-
-
 
 /* =========== order form =========== */
 
