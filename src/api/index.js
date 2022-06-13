@@ -1,3 +1,0 @@
-const api = {
-  users: getValue,
-};
