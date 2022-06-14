@@ -1,4 +1,4 @@
-import fetchingData from "./fetch.js";
+import {fetchingData} from "./fetch.js";
 import Toast from "./modalWindows.js";
 
 // getting form for validation

@@ -1,4 +1,6 @@
-module.exports = function (res, req, con, next) {
+const con = require("./SQLconfig");
+
+module.exports = function (res, req, next) {
   if (req.cookies.id === undefined || req.cookies.hash === undefined) {
     res.redirect("/admin/login");
     return;

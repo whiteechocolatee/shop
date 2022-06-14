@@ -1,17 +1,19 @@
-const mysql = require("mysql");
+// const mysql = require("mysql");
 
-const con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "market",
-});
+// const con = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "root",
+//   database: "market",
+// });
+
 
 // connect cookie parser
 
 const cookieParser = require("cookie-parser");
 
 const hashGeneration = require("../../hashGeneration.js");
+const con = require("../../SQLconfig.js");
 
 module.exports = function updatingLoginHash(req, res) {
   con.query(

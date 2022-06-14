@@ -1,11 +1,13 @@
-const mysql = require("mysql");
+// const mysql = require("mysql");
 
-const con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "market",
-});
+const con = require("../../SQLconfig");
+
+// const con = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "root",
+//   database: "market",
+// });
 
 module.exports = function addingItems(req, res) {
   let data = req.body;

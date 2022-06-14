@@ -1,14 +1,15 @@
-const mysql = require("mysql");
+// const mysql = require("mysql");
 
-const con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "market",
-});
+// const con = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "root",
+//   database: "market",
+// });
 
 const sendDataMail = require("../sendMailToCustomer");
 const savingOrder = require("../savingOrderToDB");
+const con = require("../SQLconfig");
 
 module.exports = function savingCartData(req, res) {
   let keys;

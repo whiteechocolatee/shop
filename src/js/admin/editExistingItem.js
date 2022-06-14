@@ -1,5 +1,5 @@
 // getting input color for adding colors to item
-import fetchingData from "../fetch.js";
+import {fetchingData} from "../fetch.js";
 let colorPicker = document.querySelector(".choose-color");
 let newColors = [];
 

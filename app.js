@@ -14,12 +14,12 @@ const hashValidation = require("./server/hashValidation"),
 const port = 3000,
   hostname = "127.0.0.1";
 
-const con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "market",
-});
+// const con = mysql.createConnection({
+//   host: hostname,
+//   user: "root",
+//   password: "root",
+//   database: "market",
+// });
 
 app
   .use(express.json())
@@ -33,7 +33,7 @@ app
       req.originalUrl == "/admin/orders" ||
       req.originalUrl == "/admin/goods"
     ) {
-      hashValidation(res, req, con, next);
+      hashValidation(res, req, next);
     } else {
       next();
     }
